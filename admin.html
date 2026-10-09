@@ -1,0 +1,687 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElderCare - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#fce7f3', 
+                            DEFAULT: '#f472b6', 
+                            dark: '#db2777', 
+                        }
+                    },
+                    fontWeight: {
+                        semibold: '500',
+                        bold: '600',
+                        extrabold: '800',
+                        black: '900'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* === RESET & CORE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* === THEME VARIABLES === */
+        :root {
+            --bg-color: #FAFAFA;
+            --bg-secondary: #F3F4F6;
+            --bg-card: #FFFFFF;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --accent-color: #f472b6; 
+            --accent-dark: #db2777;
+            --border-color: #E5E7EB;
+            --sidebar-bg: #FFFFFF;
+        }
+
+        body.dark-mode {
+            --bg-color: #111827;
+            --bg-secondary: #1F2937;
+            --bg-card: #1F2937;
+            --text-main: #F9FAFB;
+            --text-muted: #9CA3AF;
+            --accent-color: #f472b6;
+            --accent-dark: #db2777;
+            --border-color: #374151;
+            --sidebar-bg: #1F2937;
+        }
+
+        [dir="rtl"] { text-align: right; }
+        [dir="rtl"] .ml-auto { margin-right: auto; margin-left: 0; }
+        [dir="rtl"] .mr-auto { margin-left: auto; margin-right: 0; }
+
+        /* BUTTONS */
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 800;
+        }
+        .icon-btn:hover {
+            background: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+        }
+
+        /* DASHBOARD LAYOUT */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: var(--bg-color);
+        }
+        .topbar {
+            height: 70px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            background-color: var(--sidebar-bg);
+        }
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px;
+        }
+
+        /* SIDEBAR LINKS */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 24px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-link:hover {
+            background-color: var(--bg-secondary);
+            color: var(--accent-color);
+        }
+        .sidebar-link.active {
+            color: var(--accent-color);
+            background-color: var(--bg-secondary);
+            border-left-color: var(--accent-color);
+        }
+
+        /* CARDS */
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        /* TABLES */
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+        td { font-size: 14px; color: var(--text-main); font-weight: 500; }
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .status-active { background: rgba(16, 185, 129, 0.1); color: #10B981; }
+        .status-pending { background: rgba(245, 158, 11, 0.1); color: #F59E0B; }
+        .status-error { background: rgba(239, 68, 68, 0.1); color: #EF4444; }
+
+        .content-section {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <!-- LOGO HEADER -->
+        <div class="h-[70px] flex items-center px-6 border-b border-[var(--border-color)] shrink-0">
+            <!-- 100% IDENTICAL LOGO AS REQUESTED -->
+            <a href="index.html" class="flex items-center gap-3 no-underline group w-max">
+                <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center transition-transform group-hover:scale-105 shadow-md">
+                    <i class="fa-solid fa-hands-holding-circle text-white text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold tracking-tight text-[var(--text-main)]">
+                    Elder<span class="text-brand">Care</span>
+                </span>
+            </a>
+        </div>
+
+        <div class="flex-1 py-6 space-y-1 overflow-y-auto" id="sidebar-menu">
+            <a href="#" data-target="dashboard" class="sidebar-link active"><i class="fas fa-home w-5 text-center"></i> Dashboard Overview</a>
+            <a href="#" data-target="seniors" class="sidebar-link"><i class="fas fa-users w-5 text-center"></i> Manage Seniors</a>
+            <a href="#" data-target="careplans" class="sidebar-link"><i class="fas fa-clipboard-list w-5 text-center"></i> Care Plans</a>
+            <a href="#" data-target="medical" class="sidebar-link"><i class="fas fa-heartbeat w-5 text-center"></i> Medical Records</a>
+            <a href="#" data-target="support" class="sidebar-link"><i class="fas fa-life-ring w-5 text-center"></i> Support Tickets</a>
+            <a href="#" data-target="settings" class="sidebar-link"><i class="fas fa-cogs w-5 text-center"></i> System Settings</a>
+        </div>
+
+        <div class="p-6 border-t border-[var(--border-color)]">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full border border-[var(--border-color)] bg-[var(--accent-color)] flex items-center justify-center text-white font-bold shadow-md">
+                    AD
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-[var(--text-main)]">Admin User</h4>
+                    <p class="text-xs text-[var(--text-muted)]">Facility Director</p>
+                </div>
+            </div>
+            <a href="login.html" class="mt-4 flex items-center justify-center gap-2 w-full py-2 bg-[var(--bg-secondary)] hover:bg-brand-light hover:text-brand-dark text-[var(--text-main)] rounded-lg text-sm font-semibold transition-colors border border-[var(--border-color)]">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="flex items-center gap-4">
+                <h2 id="page-title" class="text-xl font-bold text-[var(--text-main)]">Dashboard Overview</h2>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--accent-color)] mr-4 transition-colors">
+                    <i class="fas fa-arrow-left mr-1"></i> Back to Site
+                </a>
+                <button id="theme-toggle-desktop" class="icon-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon-desktop"></i>
+                </button>
+                <button id="rtl-btn" class="icon-btn" title="Toggle LTR/RTL">
+                    LTR
+                </button>
+            </div>
+        </header>
+
+        <!-- CONTENT AREA -->
+        <div class="content-area">
+            
+            <!-- DASHBOARD SECTION (Default Active) -->
+            <div id="section-dashboard" class="content-section">
+                <!-- STATS GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-brand-light text-brand dark:bg-brand/20">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <p class="text-[var(--text-muted)] text-xs font-bold uppercase tracking-wider mb-1">Enrolled Seniors</p>
+                            <h3 class="text-2xl font-black text-[var(--text-main)]">254</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue-100 text-blue-600 dark:bg-blue-900/30">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div>
+                            <p class="text-[var(--text-muted)] text-xs font-bold uppercase tracking-wider mb-1">Monthly Revenue</p>
+                            <h3 class="text-2xl font-black text-[var(--text-main)]">$185.5K</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-purple-100 text-purple-600 dark:bg-purple-900/30">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <div>
+                            <p class="text-[var(--text-muted)] text-xs font-bold uppercase tracking-wider mb-1">Active Plans</p>
+                            <h3 class="text-2xl font-black text-[var(--text-main)]">3 Tiers</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-orange-100 text-orange-600 dark:bg-orange-900/30">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <div>
+                            <p class="text-[var(--text-muted)] text-xs font-bold uppercase tracking-wider mb-1">Pending Apps</p>
+                            <h3 class="text-xl font-black text-[var(--text-main)] mt-1">12</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHARTS & TABLES -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- CONTENT SECTION -->
+                    <div class="lg:col-span-2 bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-[var(--text-main)] text-lg">System Alerts & Actions</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="p-5 border border-red-200 dark:border-red-900/50 rounded-xl bg-red-50 dark:bg-red-900/10 flex items-start gap-4">
+                                <i class="fas fa-exclamation-triangle text-red-500 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-red-700 dark:text-red-400">Staffing Alert: Memory Care Unit</h4>
+                                    <p class="text-sm text-red-600 dark:text-red-300 mt-1">Two caregivers have called in sick for the afternoon shift. Ratio currently below compliance.</p>
+                                    <button class="mt-3 text-xs font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 px-3 py-1.5 rounded hover:bg-red-200 transition-colors">Request Cover</button>
+                                </div>
+                            </div>
+                            <div class="p-5 border border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)] flex items-start gap-4">
+                                <i class="fas fa-notes-medical text-[var(--text-muted)] text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-[var(--text-main)]">Upcoming Doctor Visit</h4>
+                                    <p class="text-sm text-[var(--text-muted)] mt-1">Dr. Cole is scheduled for routine consultations on Thursday at 9:00 AM. 15 seniors are queued.</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mt-4">
+                                <button class="flex items-center justify-center gap-2 p-3 bg-[var(--accent-color)] text-white rounded-lg font-bold text-sm hover:bg-[var(--accent-dark)] shadow-sm shadow-brand/30 transition-all hover:-translate-y-0.5">
+                                    <i class="fas fa-bullhorn"></i> Send Family Announcement
+                                </button>
+                                <button class="flex items-center justify-center gap-2 p-3 border border-[var(--border-color)] text-[var(--text-main)] rounded-lg font-bold text-sm hover:bg-[var(--bg-secondary)] transition-colors">
+                                    <i class="fas fa-file-export"></i> Export Monthly Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RECENT ACTIVITY -->
+                    <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                        <h3 class="font-bold text-[var(--text-main)] text-lg mb-6">Facility Activity</h3>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="w-2 h-2 rounded-full bg-[var(--accent-color)] mt-2"></div>
+                                <div>
+                                    <p class="text-sm font-semibold text-[var(--text-main)]">New senior registered</p>
+                                    <p class="text-xs text-[var(--text-muted)] mt-1">Martha Stevens (Drop-In Plan)</p>
+                                    <p class="text-[10px] text-[var(--text-muted)] mt-1">10 mins ago</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
+                                <div>
+                                    <p class="text-sm font-semibold text-[var(--text-main)]">Care plan upgraded</p>
+                                    <p class="text-xs text-[var(--text-muted)] mt-1">Robert Garcia to Specialized Care</p>
+                                    <p class="text-[10px] text-[var(--text-muted)] mt-1">2 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-2 h-2 rounded-full bg-orange-500 mt-2"></div>
+                                <div>
+                                    <p class="text-sm font-semibold text-[var(--text-main)]">Medical profile updated</p>
+                                    <p class="text-xs text-[var(--text-muted)] mt-1">Added dietary restriction for Joan W.</p>
+                                    <p class="text-[10px] text-[var(--text-muted)] mt-1">5 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-2 h-2 rounded-full bg-purple-500 mt-2"></div>
+                                <div>
+                                    <p class="text-sm font-semibold text-[var(--text-main)]">Transport Shuttle Arrived</p>
+                                    <p class="text-xs text-[var(--text-muted)] mt-1">Morning pickup route completed safely</p>
+                                    <p class="text-[10px] text-[var(--text-muted)] mt-1">Today at 8:45 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TABLE -->
+                <div class="mt-8 bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)] overflow-x-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-[var(--text-main)] text-lg">Recent Enrollments</h3>
+                        <button class="text-[var(--accent-color)] text-sm font-semibold hover:underline">View All</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Member</th>
+                                <th>Care Plan</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                <td>
+                                    <div class="font-semibold">Martha Stevens</div>
+                                    <div class="text-xs text-[var(--text-muted)]">Drop-In / Half Day</div>
+                                </td>
+                                <td>Basic Support</td>
+                                <td>Oct 09, 2026</td>
+                                <td class="font-bold">$45.00</td>
+                                <td><span class="status-badge status-active bg-emerald-100 text-emerald-600">Paid</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                <td>
+                                    <div class="font-semibold">Arthur Pendelton</div>
+                                    <div class="text-xs text-[var(--text-muted)]">Full Monthly Plan</div>
+                                </td>
+                                <td>Standard Care</td>
+                                <td>Oct 08, 2026</td>
+                                <td class="font-bold">$850.00</td>
+                                <td><span class="status-badge status-active bg-emerald-100 text-emerald-600">Paid</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                <td>
+                                    <div class="font-semibold">Eleanor Rigby</div>
+                                    <div class="text-xs text-[var(--text-muted)]">Specialized Care</div>
+                                </td>
+                                <td>Memory Care Wing</td>
+                                <td>Oct 07, 2026</td>
+                                <td class="font-bold">$1,200.00</td>
+                                <td><span class="status-badge status-pending">Processing</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                <td>
+                                    <div class="font-semibold">William Thomas</div>
+                                    <div class="text-xs text-[var(--text-muted)]">Drop-In / Half Day</div>
+                                </td>
+                                <td>Basic Support</td>
+                                <td>Oct 06, 2026</td>
+                                <td class="font-bold">$45.00</td>
+                                <td><span class="status-badge status-error">Declined</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- MANAGE SENIORS SECTION -->
+            <div id="section-seniors" class="content-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-[var(--text-main)] text-xl">Manage Seniors</h3>
+                    <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors"><i class="fas fa-plus mr-2"></i>Add Senior</button>
+                </div>
+                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                    <div class="flex items-center gap-3 mb-6">
+                        <input type="text" placeholder="Search seniors..." class="w-full max-w-md bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)]">
+                        <button class="bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:bg-[var(--border-color)] text-[var(--text-main)] font-bold py-2 px-4 rounded-lg transition-colors"><i class="fas fa-search"></i></button>
+                    </div>
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Primary Contact</th>
+                                <th>Care Level</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                <td class="font-semibold text-[var(--text-main)]">John Doe</td>
+                                <td>82</td>
+                                <td>Jane Doe (Daughter)</td>
+                                <td><span class="status-badge bg-blue-100 text-blue-600">Standard</span></td>
+                                <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">View Profile</button></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                <td class="font-semibold text-[var(--text-main)]">Mary Smith</td>
+                                <td>78</td>
+                                <td>Robert Smith (Son)</td>
+                                <td><span class="status-badge bg-purple-100 text-purple-600">Memory Care</span></td>
+                                <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">View Profile</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CARE PLANS SECTION -->
+            <div id="section-careplans" class="content-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-[var(--text-main)] text-xl">Care Plans</h3>
+                    <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors"><i class="fas fa-plus mr-2"></i>Create Plan</button>
+                </div>
+                <div class="grid gap-6 grid-cols-1 md:grid-cols-3">
+                    <div class="p-6 border border-[var(--border-color)] rounded-[20px] bg-[var(--bg-card)]">
+                        <h4 class="font-bold text-xl text-[var(--text-main)]">Basic Support</h4>
+                        <p class="text-sm text-[var(--text-muted)] mb-4 mt-1">Drop-In / Half Day</p>
+                        <span class="status-badge status-active bg-emerald-100 text-emerald-600 mb-4 inline-block">Active - 45 Members</span>
+                        <div class="mt-4 flex gap-2">
+                            <button class="flex-1 bg-[var(--bg-secondary)] hover:bg-[var(--border-color)] text-[var(--text-main)] text-sm font-bold py-2 rounded-lg transition-colors">Edit</button>
+                            <button class="flex-1 bg-[var(--bg-secondary)] hover:bg-[var(--border-color)] text-[var(--text-main)] text-sm font-bold py-2 rounded-lg transition-colors">View Members</button>
+                        </div>
+                    </div>
+                    <div class="p-6 border border-[var(--border-color)] rounded-[20px] bg-[var(--bg-card)]">
+                        <h4 class="font-bold text-xl text-[var(--text-main)]">Standard Care</h4>
+                        <p class="text-sm text-[var(--text-muted)] mb-4 mt-1">Full Monthly Plan</p>
+                        <span class="status-badge status-active bg-emerald-100 text-emerald-600 mb-4 inline-block">Active - 120 Members</span>
+                        <div class="mt-4 flex gap-2">
+                            <button class="flex-1 bg-[var(--bg-secondary)] hover:bg-[var(--border-color)] text-[var(--text-main)] text-sm font-bold py-2 rounded-lg transition-colors">Edit</button>
+                            <button class="flex-1 bg-[var(--bg-secondary)] hover:bg-[var(--border-color)] text-[var(--text-main)] text-sm font-bold py-2 rounded-lg transition-colors">View Members</button>
+                        </div>
+                    </div>
+                    <div class="p-6 border border-[var(--border-color)] rounded-[20px] bg-[var(--bg-card)]">
+                        <h4 class="font-bold text-xl text-[var(--text-main)]">Memory Care</h4>
+                        <p class="text-sm text-[var(--text-muted)] mb-4 mt-1">Specialized Care Wing</p>
+                        <span class="status-badge status-active bg-emerald-100 text-emerald-600 mb-4 inline-block">Active - 89 Members</span>
+                        <div class="mt-4 flex gap-2">
+                            <button class="flex-1 bg-[var(--bg-secondary)] hover:bg-[var(--border-color)] text-[var(--text-main)] text-sm font-bold py-2 rounded-lg transition-colors">Edit</button>
+                            <button class="flex-1 bg-[var(--bg-secondary)] hover:bg-[var(--border-color)] text-[var(--text-main)] text-sm font-bold py-2 rounded-lg transition-colors">View Members</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEDICAL RECORDS SECTION -->
+            <div id="section-medical" class="content-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-[var(--text-main)] text-xl">Medical Records</h3>
+                </div>
+                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                    <div class="flex items-center gap-3 mb-6">
+                        <input type="text" placeholder="Search by Senior Name or ID..." class="w-full max-w-md bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)]">
+                        <button class="bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:bg-[var(--border-color)] text-[var(--text-main)] font-bold py-2 px-4 rounded-lg transition-colors"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="p-8 text-center border-2 border-dashed border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)]">
+                        <i class="fas fa-folder-open text-4xl text-[var(--text-muted)] mb-3"></i>
+                        <h4 class="font-bold text-[var(--text-main)] mb-1">Search to view records</h4>
+                        <p class="text-sm text-[var(--text-muted)]">Secure vault for medical history, prescriptions, and dietary requirements.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUPPORT TICKETS SECTION -->
+            <div id="section-support" class="content-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-[var(--text-main)] text-xl">Support Tickets</h3>
+                </div>
+                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                    <p class="text-[var(--text-muted)] mb-6 text-sm">Manage family inquiries and staff requests.</p>
+                    <div class="space-y-3">
+                        <div class="p-4 border border-[var(--border-color)] rounded-xl flex justify-between items-center bg-[var(--bg-secondary)] hover:border-[var(--accent-color)] transition-colors cursor-pointer">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600"><i class="fas fa-file-invoice-dollar"></i></div>
+                                <div>
+                                    <h5 class="font-bold text-sm text-[var(--text-main)]">Billing Question for October</h5>
+                                    <p class="text-xs text-[var(--text-muted)] mt-1">From: John Jenkins (Family) • Created 2 hours ago</p>
+                                </div>
+                            </div>
+                            <span class="status-badge status-pending">Open</span>
+                        </div>
+                        <div class="p-4 border border-[var(--border-color)] rounded-xl flex justify-between items-center bg-[var(--bg-secondary)] hover:border-[var(--accent-color)] transition-colors cursor-pointer">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600"><i class="fas fa-apple-alt"></i></div>
+                                <div>
+                                    <h5 class="font-bold text-sm text-[var(--text-main)]">Change dietary plan</h5>
+                                    <p class="text-xs text-[var(--text-muted)] mt-1">From: Medical Staff • Closed Yesterday</p>
+                                </div>
+                            </div>
+                            <span class="status-badge status-active bg-emerald-100 text-emerald-600">Resolved</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SYSTEM SETTINGS SECTION -->
+            <div id="section-settings" class="content-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-[var(--text-main)] text-xl">System Settings</h3>
+                </div>
+                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                    <div class="max-w-xl space-y-6">
+                        <div>
+                            <h4 class="font-bold text-[var(--text-main)] mb-2 text-sm">Facility Name</h4>
+                            <input type="text" value="Elder Day Care & Senior Activity Center" class="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)] transition-colors">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[var(--text-main)] mb-2 text-sm">Admin Email Notifications</h4>
+                            <label class="flex items-center gap-2 cursor-pointer mt-2">
+                                <input type="checkbox" checked class="w-4 h-4 rounded border-[var(--border-color)] text-[var(--accent-color)] focus:ring-[var(--accent-color)] cursor-pointer">
+                                <span class="text-sm text-[var(--text-muted)]">Receive daily summary emails</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer mt-3">
+                                <input type="checkbox" checked class="w-4 h-4 rounded border-[var(--border-color)] text-[var(--accent-color)] focus:ring-[var(--accent-color)] cursor-pointer">
+                                <span class="text-sm text-[var(--text-muted)]">Alert on urgent medical events</span>
+                            </label>
+                        </div>
+                        <div class="pt-4 border-t border-[var(--border-color)]">
+                            <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2.5 px-6 rounded-lg shadow transition-colors text-sm">Save Settings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Tab switching logic
+        const sidebarLinks = document.querySelectorAll('.sidebar-link[data-target]');
+        const contentSections = document.querySelectorAll('.content-section');
+        const pageTitle = document.getElementById('page-title');
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Update active link styling
+                sidebarLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Update header title
+                if(pageTitle) {
+                    pageTitle.innerText = link.innerText.trim();
+                }
+
+                // Hide all sections and show target
+                const targetId = 'section-' + link.getAttribute('data-target');
+                contentSections.forEach(sec => {
+                    if(sec.id === targetId) {
+                        sec.classList.remove('hidden');
+                        // Optional simple fade in
+                        sec.style.opacity = 0;
+                        setTimeout(() => sec.style.opacity = 1, 50);
+                    } else {
+                        sec.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Theme logic
+        const themeDesktop = document.getElementById('theme-toggle-desktop');
+        const iconDesktop = document.getElementById('theme-icon-desktop');
+        const theme = localStorage.getItem('theme') || 'light';
+
+        function updateThemeUI(isDark) {
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+                if (iconDesktop) iconDesktop.className = 'fas fa-sun';
+            } else {
+                document.body.classList.remove('dark-mode');
+                if (iconDesktop) iconDesktop.className = 'fas fa-moon';
+            }
+        }
+
+        updateThemeUI(theme === 'dark');
+
+        function toggleTheme() {
+            const isDark = !document.body.classList.contains('dark-mode');
+            updateThemeUI(isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        if (themeDesktop) themeDesktop.onclick = toggleTheme;
+
+        // RTL/LTR logic
+        const rtlBtn = document.getElementById('rtl-btn');
+        const dir = localStorage.getItem('dir') || 'ltr';
+
+        function updateRTLUI(currentDir) {
+            const isRTL = currentDir === 'rtl';
+            if (rtlBtn) rtlBtn.innerText = isRTL ? 'RTL' : 'LTR';
+        }
+
+        if (dir === 'rtl') { document.documentElement.dir = 'rtl'; }
+        updateRTLUI(dir);
+
+        function toggleRTL() {
+            const isRTL = document.documentElement.dir === 'rtl';
+            const newDir = isRTL ? 'ltr' : 'rtl';
+            document.documentElement.dir = newDir;
+            localStorage.setItem('dir', newDir);
+            updateRTLUI(newDir);
+        }
+
+        if (rtlBtn) rtlBtn.onclick = toggleRTL;
+
+    </script>
+</body>
+</html>

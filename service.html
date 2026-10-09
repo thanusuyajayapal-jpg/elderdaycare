@@ -1,0 +1,525 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Our Services - Elder Day Care & Senior Activity Center</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration for Dark Mode & Custom Colors -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              light: '#fce7f3', 
+              DEFAULT: '#f472b6', 
+              dark: '#db2777', 
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    body.menu-open { overflow: hidden; }
+    .mobile-drawer { right: -100%; transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+    .mobile-drawer.active { right: 0; }
+    [dir="rtl"] .mobile-drawer { right: auto; left: -100%; }
+    [dir="rtl"] .mobile-drawer.active { left: 0; right: auto; }
+    .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .mobile-dropdown-content.active { max-height: 300px; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
+
+  <!-- ================= HEADER & NAVBAR ================= -->
+  <header class="sticky top-0 w-full bg-white dark:bg-gray-800 shadow-sm z-50 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 no-underline group">
+        <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center transition-transform group-hover:scale-105">
+          <i class="fa-solid fa-hands-holding-circle text-white text-xl"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Elder<span class="text-brand">Care</span>
+        </span>
+      </a>
+      
+      <ul class="hidden xl:flex gap-8 list-none items-center m-0 p-0">
+        <li class="relative group">
+          <a href="#" id="navHome" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1 flex items-center gap-1">Home <i class="fa-solid fa-chevron-down text-[10px]"></i></a>
+          <ul class="absolute top-full -left-4 bg-white dark:bg-gray-700 min-w-[200px] rounded-xl shadow-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all z-50 flex flex-col">
+            <li><a href="index.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">Home 1</a></li>
+            <li><a href="home2.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">Home 2</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html" id="navAbout" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">About</a></li>
+        <li><a href="service.html" id="navService" class="font-medium text-brand border-b-2 border-brand pb-1">Service</a></li>
+        <li><a href="careplans.html" id="navcareplans" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">Care Plans</a></li>
+        <li><a href="Gallery.html" id="navGallery" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">Gallery</a></li>
+        <li><a href="contact.html" id="navContact" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">Contact</a></li>
+        <li class="relative group">
+          <a href="#" id="navDashboard" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1 flex items-center gap-1">Dashboard <i class="fa-solid fa-chevron-down text-[10px]"></i></a>
+          <ul class="absolute top-full -left-4 bg-white dark:bg-gray-700 min-w-[200px] rounded-xl shadow-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all z-50 flex flex-col">
+            <li><a href="user.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">User Dashboard</a></li>
+            <li><a href="admin.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">Admin Dashboard</a></li>
+          </ul>
+        </li>
+      </ul>
+      
+      <div class="hidden xl:flex items-center gap-4">
+        <a href="login.html" class="px-6 py-2 rounded-full text-sm font-semibold border-2 border-brand text-brand hover:bg-brand hover:text-white transition-all dark:border-brand-light dark:text-brand-light dark:hover:bg-brand-light dark:hover:text-gray-900">Login</a>
+        <button id="darkToggleBtn" class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-brand text-gray-600 dark:text-gray-300 transition-all">🌙</button>
+        <button id="rtlToggleBtn" class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-brand text-gray-600 dark:text-gray-300 text-xs font-bold transition-all">LTR</button>
+      </div>
+      
+      <button class="xl:hidden flex flex-col justify-between w-7 h-5 cursor-pointer bg-transparent border-none z-[1001] group" id="hamburgerBtn" aria-label="Menu">
+        <span class="w-full h-[2px] bg-brand dark:bg-brand-light rounded transition-all group-hover:bg-brand-dark"></span>
+        <span class="w-full h-[2px] bg-brand dark:bg-brand-light rounded transition-all group-hover:bg-brand-dark"></span>
+        <span class="w-full h-[2px] bg-brand dark:bg-brand-light rounded transition-all group-hover:bg-brand-dark"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= MOBILE MENU OVERLAY ================= -->
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[998] opacity-0 invisible transition-all duration-300" id="mobileOverlay"></div>
+  <div class="mobile-drawer fixed top-0 w-[85%] max-w-[400px] h-screen bg-white dark:bg-gray-800 z-[1001] p-8 pt-24 overflow-y-auto shadow-2xl" id="mobileMenu">
+    <button class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full text-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors rtl:right-auto rtl:left-6" id="closeMenuBtn">✕</button>
+    <ul class="flex flex-col gap-4 list-none m-0 p-0">
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2">
+        <div class="flex justify-between items-center py-2 cursor-pointer text-gray-800 dark:text-gray-200 font-medium mobile-dropdown-toggle" data-dropdown="dropdown1">
+          <span id="mobileHomeText">Home</span>
+          <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+        </div>
+        <div class="mobile-dropdown-content pl-4 rtl:pl-0 rtl:pr-4" id="dropdown1">
+          <a href="index.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">Home 1</a>
+          <a href="home2.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">Home 2</a>
+        </div>
+      </li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="about.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">About</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="service.html" class="block py-2 text-lg font-bold text-brand hover:text-brand-dark">Service</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="careplans.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">Care Plans</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="Gallery.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">Gallery</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="contact.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">Contact</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2">
+        <div class="flex justify-between items-center py-2 cursor-pointer text-gray-800 dark:text-gray-200 font-medium mobile-dropdown-toggle" data-dropdown="dropdown2">
+          <span id="mobileDashboardText">Dashboard</span>
+          <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+        </div>
+        <div class="mobile-dropdown-content pl-4 rtl:pl-0 rtl:pr-4" id="dropdown2">
+          <a href="user.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">User Dashboard</a>
+          <a href="admin.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">Admin Dashboard</a>
+        </div>
+      </li>
+      <li class="pt-4">
+        <div class="flex gap-4 mb-6">
+          <a href="login.html" class="flex-1 text-center py-3 rounded-full font-semibold border-2 border-brand text-brand dark:border-brand-light dark:text-brand-light">Login</a>
+          <a href="signup.html" class="flex-1 text-center py-3 rounded-full font-semibold bg-brand text-white hover:bg-brand-dark">Sign Up</a>
+        </div>
+        <div class="flex gap-4">
+          <button id="mobileDarkToggle" class="flex-1 py-2 rounded-full border-2 border-gray-200 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300">🌙 Dark</button>
+          <button id="mobileRtlToggle" class="flex-1 py-2 rounded-full border-2 border-gray-200 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300">LTR</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ================= SERVICES PAGE HERO BANNER ================= -->
+  <section class="relative min-h-[75vh] flex items-center justify-center text-center overflow-hidden isolate bg-gray-900">
+    <div class="absolute inset-0 -z-20">
+      <div class="slider-image absolute inset-0 bg-cover bg-center opacity-100 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (6).jpg');"></div>
+      <div class="slider-image absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (5).jpg');"></div>
+      <div class="slider-image absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (4).jpg');"></div>
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-gray-900/80 to-gray-900/95 -z-10"></div>
+    <div class="max-w-4xl mx-auto px-6 py-24 text-white z-10">
+      <div class="text-sm md:text-base font-semibold tracking-[0.2em] uppercase mb-4 text-brand-light">Professional Care Programs</div>
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+        Comprehensive Services <br>
+        <span class="font-normal italic text-brand-light text-4xl md:text-6xl mt-2 block">Designed for health and happiness</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">From specialized memory care and physical therapy to engaging social activities and nutritious meals, we provide everything needed for a fulfilling day.</p>
+      <a href="#services" class="inline-block bg-brand hover:bg-brand-dark text-white font-semibold py-4 px-10 rounded-full transition-transform hover:scale-105 shadow-lg">Explore Our Programs</a>
+    </div>
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
+      <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all scale-125 bg-brand border-2 border-white" aria-label="Slide 1"></button>
+      <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" aria-label="Slide 2"></button>
+      <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" aria-label="Slide 3"></button>
+    </div>
+  </section>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main id="services">
+    
+    <!-- SECTION 1: 6 SERVICE CARDS GRID -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Primary Services</h2>
+          <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Tailored care plans focused on enriching the daily lives of our members through health, wellness, and community.</p>
+        </div>
+        
+        <!-- Grid setup ensures equal height columns with flex layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+          
+          <!-- Card 1 -->
+          <div class="flex flex-col bg-white dark:bg-gray-800 rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 group h-full relative">
+            <div class="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur text-brand p-3 rounded-full z-10 shadow-sm"><i class="fa-solid fa-stethoscope"></i></div>
+            <div class="relative h-56 overflow-hidden">
+              <img src="images/eldercare (6).jpg" alt="Medical Monitoring" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Daily Health Monitoring</h3>
+              <p class="text-gray-600 dark:text-gray-400 flex-grow mb-6 text-sm leading-relaxed">Routine check-ups, medication management, and personalized health tracking by our registered nursing staff.</p>
+              <a href="services-details.html" class="mt-auto block text-center bg-transparent border-2 border-brand/20 dark:border-gray-600 text-brand hover:bg-brand hover:border-brand hover:text-white font-semibold py-3 px-6 rounded-full transition-all w-full">Enquire Now</a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="flex flex-col bg-white dark:bg-gray-800 rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 group h-full relative">
+            <div class="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur text-brand p-3 rounded-full z-10 shadow-sm"><i class="fa-solid fa-brain"></i></div>
+            <div class="relative h-56 overflow-hidden">
+              <img src="images/eldercare (5).jpg" alt="Memory Care" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Specialized Memory Care</h3>
+              <p class="text-gray-600 dark:text-gray-400 flex-grow mb-6 text-sm leading-relaxed">Cognitive therapies, puzzle engagement, and specialized support for individuals experiencing Alzheimer's or dementia.</p>
+              <a href="services-details.html" class="mt-auto block text-center bg-transparent border-2 border-brand/20 dark:border-gray-600 text-brand hover:bg-brand hover:border-brand hover:text-white font-semibold py-3 px-6 rounded-full transition-all w-full">Enquire Now</a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="flex flex-col bg-white dark:bg-gray-800 rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 group h-full relative">
+            <div class="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur text-brand p-3 rounded-full z-10 shadow-sm"><i class="fa-solid fa-person-walking"></i></div>
+            <div class="relative h-56 overflow-hidden">
+              <img src="images/eldercare (4).jpg" alt="Physical Therapy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Physical Rehabilitation</h3>
+              <p class="text-gray-600 dark:text-gray-400 flex-grow mb-6 text-sm leading-relaxed">Gentle yoga, stretching sessions, and custom physical therapy plans to improve mobility and balance.</p>
+              <a href="services-details.html" class="mt-auto block text-center bg-transparent border-2 border-brand/20 dark:border-gray-600 text-brand hover:bg-brand hover:border-brand hover:text-white font-semibold py-3 px-6 rounded-full transition-all w-full">Enquire Now</a>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="flex flex-col bg-white dark:bg-gray-800 rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 group h-full relative">
+            <div class="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur text-brand p-3 rounded-full z-10 shadow-sm"><i class="fa-solid fa-utensils"></i></div>
+            <div class="relative h-56 overflow-hidden">
+              <img src="images/eldercare (3).jpg" alt="Nutrition" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Nutritional Meals</h3>
+              <p class="text-gray-600 dark:text-gray-400 flex-grow mb-6 text-sm leading-relaxed">Chef-prepared, dietitian-approved meals catering to specific dietary requirements like diabetic or low-sodium plans.</p>
+              <a href="services-details.html" class="mt-auto block text-center bg-transparent border-2 border-brand/20 dark:border-gray-600 text-brand hover:bg-brand hover:border-brand hover:text-white font-semibold py-3 px-6 rounded-full transition-all w-full">Enquire Now</a>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="flex flex-col bg-white dark:bg-gray-800 rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 group h-full relative">
+            <div class="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur text-brand p-3 rounded-full z-10 shadow-sm"><i class="fa-solid fa-masks-theater"></i></div>
+            <div class="relative h-56 overflow-hidden">
+              <img src="images/eldercare (21).jpg" alt="Social Activities" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Social & Arts Events</h3>
+              <p class="text-gray-600 dark:text-gray-400 flex-grow mb-6 text-sm leading-relaxed">A robust calendar of painting, music therapy, group discussions, and local community trips to foster friendships.</p>
+              <a href="services-details.html" class="mt-auto block text-center bg-transparent border-2 border-brand/20 dark:border-gray-600 text-brand hover:bg-brand hover:border-brand hover:text-white font-semibold py-3 px-6 rounded-full transition-all w-full">Enquire Now</a>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="flex flex-col bg-white dark:bg-gray-800 rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 group h-full relative">
+            <div class="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur text-brand p-3 rounded-full z-10 shadow-sm"><i class="fa-solid fa-van-shuttle"></i></div>
+            <div class="relative h-56 overflow-hidden">
+              <img src="images/eldercare (20).jpg" alt="Transportation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Safe Transportation</h3>
+              <p class="text-gray-600 dark:text-gray-400 flex-grow mb-6 text-sm leading-relaxed">Door-to-door, wheelchair-accessible transit options to ensure our members arrive safely and comfortably every day.</p>
+              <a href="services-details.html" class="mt-auto block text-center bg-transparent border-2 border-brand/20 dark:border-gray-600 text-brand hover:bg-brand hover:border-brand hover:text-white font-semibold py-3 px-6 rounded-full transition-all w-full">Enquire Now</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: WHY CHOOSE US (Extra Section 1) -->
+    <section class="py-20 bg-white dark:bg-gray-800 transition-colors">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="w-full lg:w-1/2">
+            <div class="grid grid-cols-2 gap-4">
+              <img src="images/eldercare (2).jpg" class="rounded-3xl shadow-lg w-full h-48 object-cover mt-8">
+              <img src="images/eldercare (19).jpg" class="rounded-3xl shadow-lg w-full h-64 object-cover">
+            </div>
+          </div>
+          <div class="w-full lg:w-1/2">
+            <span class="text-brand font-bold uppercase tracking-wider text-sm mb-2 block">Why Choose Us</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Exceptional Care with a Personal Touch</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg">We don't believe in a one-size-fits-all approach. Every member of our community receives a customized care plan designed in collaboration with their families and physicians.</p>
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center text-brand flex-shrink-0"><i class="fa-solid fa-user-nurse"></i></div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-900 dark:text-white">1:5 Caregiver Ratio</h4>
+                  <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Ensuring personalized attention and immediate assistance for every senior.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center text-brand flex-shrink-0"><i class="fa-solid fa-house-medical-circle-check"></i></div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-900 dark:text-white">State-of-the-Art Facility</h4>
+                  <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Equipped with non-slip flooring, emergency call systems, and therapeutic lighting.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DAILY ROUTINE PROCESS (Extra Section 2) -->
+    <section class="py-20 bg-brand/5 dark:bg-gray-900 transition-colors border-y border-gray-100 dark:border-gray-800">
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-12">A Typical Day at ElderCare</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+          
+          <div class="relative z-10 flex flex-col items-center">
+            <div class="w-16 h-16 bg-white dark:bg-gray-800 border-4 border-brand rounded-full flex items-center justify-center text-xl font-bold text-gray-900 dark:text-white shadow-md mb-4">01</div>
+            <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Morning Arrival</h4>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Health vitals check, warm greetings, and a light nutritious breakfast.</p>
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div class="w-16 h-16 bg-white dark:bg-gray-800 border-4 border-brand rounded-full flex items-center justify-center text-xl font-bold text-gray-900 dark:text-white shadow-md mb-4">02</div>
+            <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Active Engagement</h4>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Group physical therapy, stretching, and cognitive puzzle sessions.</p>
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div class="w-16 h-16 bg-white dark:bg-gray-800 border-4 border-brand rounded-full flex items-center justify-center text-xl font-bold text-gray-900 dark:text-white shadow-md mb-4">03</div>
+            <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Community Lunch</h4>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">A hot, dietitian-approved meal shared in a vibrant, social dining room.</p>
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div class="w-16 h-16 bg-white dark:bg-gray-800 border-4 border-brand rounded-full flex items-center justify-center text-xl font-bold text-gray-900 dark:text-white shadow-md mb-4">04</div>
+            <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Afternoon Relaxation</h4>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Music therapy, arts and crafts, or quiet reading before evening departure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: FREQUENTLY ASKED QUESTIONS (Extra Section 3) -->
+    <section class="py-20 bg-white dark:bg-gray-800 transition-colors">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Service FAQs</h2>
+          <p class="text-gray-600 dark:text-gray-400">Common questions about our programs and admissions.</p>
+        </div>
+        <div class="space-y-6">
+          <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-2xl border border-gray-100 dark:border-gray-600">
+            <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex justify-between items-center">Do you offer half-day care programs? <i class="fa-solid fa-plus text-brand"></i></h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Yes, we offer highly flexible scheduling. Families can choose from full-day, half-day, or specific hourly drop-ins depending on availability and care needs.</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-2xl border border-gray-100 dark:border-gray-600">
+            <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex justify-between items-center">Is medical staff always on site? <i class="fa-solid fa-plus text-brand"></i></h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Absolutely. A registered nurse is present during all operating hours to handle medication administration, vital monitoring, and emergencies.</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-2xl border border-gray-100 dark:border-gray-600">
+            <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex justify-between items-center">Are meals included in the daily rate? <i class="fa-solid fa-plus text-brand"></i></h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Yes, a full-day admission includes a morning snack, a hot lunch, and an afternoon tea service tailored to dietary restrictions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-gray-950 text-gray-300 pt-16 pb-8 border-t-4 border-brand">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <div>
+        <a href="index.html" class="flex items-center gap-3 no-underline mb-6">
+          <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center">
+            <i class="fa-solid fa-hands-holding-circle text-white text-xl"></i>
+          </div>
+          <span class="text-2xl font-bold tracking-tight text-white">
+            Elder<span class="text-brand">Care</span>
+          </span>
+        </a>
+        <p class="text-gray-400 text-sm leading-relaxed mb-6">Providing a safe, warm, and engaging day environment for seniors, offering peace of mind to families everywhere.</p>
+        <div class="flex gap-4">
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand hover:text-white transition-all"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="text-white text-lg font-semibold mb-6 uppercase tracking-wider text-sm">QuickLinks</h4>
+        <ul class="flex flex-col gap-3">
+          <li><a href="index.html" class="hover:text-brand transition-colors">Home</a></li>
+          <li><a href="contact.html" class="hover:text-brand transition-colors">Contact</a></li>
+          <li><a href="about.html" class="hover:text-brand transition-colors">About</a></li>
+          <li><a href="service.html" class="hover:text-brand transition-colors">Service</a></li>
+          <li><a href="signup.html" class="hover:text-brand transition-colors">Signup</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-white text-lg font-semibold mb-6 uppercase tracking-wider text-sm">Resources</h4>
+        <ul class="flex flex-col gap-3">
+          <li><a href="#" class="hover:text-brand transition-colors">Activities Schedule</a></li>
+          <li><a href="#" class="hover:text-brand transition-colors">Health Guidelines</a></li>
+          <li><a href="#" class="hover:text-brand transition-colors">Careers</a></li>
+          <li><a href="#" class="hover:text-brand transition-colors">Family Portal</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-white text-lg font-semibold mb-6 uppercase tracking-wider text-sm">Stay Updated</h4>
+        <p class="text-gray-400 text-sm mb-4">Subscribe for monthly newsletters and center updates.</p>
+        <div class="flex border-b border-gray-700 pb-2 focus-within:border-brand transition-colors">
+          <input type="email" placeholder="Your email address" class="bg-transparent w-full outline-none text-white placeholder-gray-500">
+          <button class="text-brand hover:text-white transition-colors font-bold px-2">→</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+      <span>© 2026 Elder Care Center. All rights reserved.</span>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-brand transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-brand transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-brand transition-colors">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      const html = document.documentElement;
+      const darkToggleBtns = [document.getElementById('darkToggleBtn'), document.getElementById('mobileDarkToggle')];
+      
+      const setDarkMode = (isDark) => {
+        if (isDark) {
+          html.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          html.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+        if(darkToggleBtns[0]) darkToggleBtns[0].textContent = isDark ? '☀️' : '🌙';
+        if(darkToggleBtns[1]) darkToggleBtns[1].textContent = isDark ? '☀️ Light' : '🌙 Dark';
+      };
+
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        setDarkMode(true);
+      } else {
+        setDarkMode(false);
+      }
+
+      darkToggleBtns.forEach(btn => {
+        if(btn) btn.addEventListener('click', () => setDarkMode(!html.classList.contains('dark')));
+      });
+
+      const rtlToggleBtns = [document.getElementById('rtlToggleBtn'), document.getElementById('mobileRtlToggle')];
+      const setRTL = (isRTL) => {
+        html.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+        localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr');
+        rtlToggleBtns.forEach(btn => {
+          if(btn) btn.textContent = isRTL ? 'LTR' : 'RTL';
+        });
+      };
+      
+      if (localStorage.getItem('dir') === 'rtl') setRTL(true);
+      
+      rtlToggleBtns.forEach(btn => {
+        if(btn) btn.addEventListener('click', () => setRTL(html.getAttribute('dir') !== 'rtl'));
+      });
+
+      const hamburger = document.getElementById('hamburgerBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileOverlay');
+      const closeMenu = document.getElementById('closeMenuBtn');
+      
+      const toggleMenu = (show) => {
+        if (show) {
+          mobileMenu.classList.add('active');
+          overlay.classList.remove('opacity-0', 'invisible');
+          overlay.classList.add('opacity-100', 'visible');
+          document.body.classList.add('menu-open');
+        } else {
+          mobileMenu.classList.remove('active');
+          overlay.classList.add('opacity-0', 'invisible');
+          overlay.classList.remove('opacity-100', 'visible');
+          document.body.classList.remove('menu-open');
+        }
+      };
+
+      hamburger?.addEventListener('click', () => toggleMenu(true));
+      closeMenu?.addEventListener('click', () => toggleMenu(false));
+      overlay?.addEventListener('click', () => toggleMenu(false));
+
+      document.querySelectorAll('.mobile-dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-dropdown');
+          const content = document.getElementById(targetId);
+          const icon = this.querySelector('i');
+          
+          if (content) {
+            content.classList.toggle('active');
+            if (icon) {
+              icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : '';
+            }
+          }
+        });
+      });
+
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slider-image');
+      const dots = document.querySelectorAll('.dot');
+      
+      const showSlide = (index) => {
+        slides.forEach((slide, i) => {
+          slide.style.opacity = i === index ? '1' : '0';
+        });
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add('scale-125', 'bg-brand', 'border-2', 'border-white');
+            dot.classList.remove('bg-white/50');
+          } else {
+            dot.classList.remove('scale-125', 'bg-brand', 'border-2', 'border-white');
+            dot.classList.add('bg-white/50');
+          }
+        });
+        currentSlide = index;
+      };
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+      });
+
+      setInterval(() => {
+        const nextSlide = (currentSlide + 1) % slides.length;
+        showSlide(nextSlide);
+      }, 5000);
+
+    });
+  </script>
+</body>
+</html>

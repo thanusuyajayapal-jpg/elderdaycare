@@ -1,0 +1,560 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>About Us - Elder Day Care & Senior Activity Center</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration for Dark Mode & Custom Colors -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              light: '#fce7f3', // Very light pink for backgrounds and highlights
+              DEFAULT: '#f472b6', // Light pink main color
+              dark: '#db2777', // Deeper pink for hover states to maintain contrast
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    /* Essential overrides for mobile menu functionality */
+    body.menu-open { overflow: hidden; }
+    
+    /* Mobile drawer states */
+    .mobile-drawer { right: -100%; transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+    .mobile-drawer.active { right: 0; }
+    [dir="rtl"] .mobile-drawer { right: auto; left: -100%; }
+    [dir="rtl"] .mobile-drawer.active { left: 0; right: auto; }
+    
+    /* Mobile Dropdown Animations */
+    .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .mobile-dropdown-content.active { max-height: 300px; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
+
+  <!-- ================= HEADER & NAVBAR ================= -->
+  <header class="sticky top-0 w-full bg-white dark:bg-gray-800 shadow-sm z-50 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 no-underline group">
+        <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center transition-transform group-hover:scale-105">
+          <i class="fa-solid fa-hands-holding-circle text-white text-xl"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Elder<span class="text-brand">Care</span>
+        </span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <ul class="hidden xl:flex gap-8 list-none items-center m-0 p-0">
+        <li class="relative group">
+          <a href="#" id="navHome" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1 flex items-center gap-1">Home <i class="fa-solid fa-chevron-down text-[10px]"></i></a>
+          <ul class="absolute top-full -left-4 bg-white dark:bg-gray-700 min-w-[200px] rounded-xl shadow-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all z-50 flex flex-col">
+            <li><a href="index.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">Home 1</a></li>
+            <li><a href="home2.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">Home 2</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html" id="navAbout" class="font-medium text-brand border-b-2 border-brand pb-1">About</a></li>
+        <li><a href="service.html" id="navService" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">Service</a></li>
+        <li><a href="careplans.html" id="navcareplans" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">Care Plans</a></li>
+        <li><a href="Gallery.html" id="navGallery" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">Gallery</a></li>
+        <li><a href="contact.html" id="navContact" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">Contact</a></li>
+        <li class="relative group">
+          <a href="#" id="navDashboard" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1 flex items-center gap-1">Dashboard <i class="fa-solid fa-chevron-down text-[10px]"></i></a>
+          <ul class="absolute top-full -left-4 bg-white dark:bg-gray-700 min-w-[200px] rounded-xl shadow-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all z-50 flex flex-col">
+            <li><a href="user.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">User Dashboard</a></li>
+            <li><a href="admin.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">Admin Dashboard</a></li>
+          </ul>
+        </li>
+      </ul>
+      
+      <!-- Desktop Actions -->
+      <div class="hidden xl:flex items-center gap-4">
+        <a href="login.html" class="px-6 py-2 rounded-full text-sm font-semibold border-2 border-brand text-brand hover:bg-brand hover:text-white transition-all dark:border-brand-light dark:text-brand-light dark:hover:bg-brand-light dark:hover:text-gray-900">Login</a>
+        <button id="darkToggleBtn" class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-brand text-gray-600 dark:text-gray-300 transition-all">🌙</button>
+        <button id="rtlToggleBtn" class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-brand text-gray-600 dark:text-gray-300 text-xs font-bold transition-all">LTR</button>
+      </div>
+      
+      <!-- Hamburger Menu (Mobile) -->
+      <button class="xl:hidden flex flex-col justify-between w-7 h-5 cursor-pointer bg-transparent border-none z-[1001] group" id="hamburgerBtn" aria-label="Menu">
+        <span class="w-full h-[2px] bg-brand dark:bg-brand-light rounded transition-all group-hover:bg-brand-dark"></span>
+        <span class="w-full h-[2px] bg-brand dark:bg-brand-light rounded transition-all group-hover:bg-brand-dark"></span>
+        <span class="w-full h-[2px] bg-brand dark:bg-brand-light rounded transition-all group-hover:bg-brand-dark"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= MOBILE MENU OVERLAY ================= -->
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[998] opacity-0 invisible transition-all duration-300" id="mobileOverlay"></div>
+  
+  <div class="mobile-drawer fixed top-0 w-[85%] max-w-[400px] h-screen bg-white dark:bg-gray-800 z-[1001] p-8 pt-24 overflow-y-auto shadow-2xl" id="mobileMenu">
+    <button class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full text-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors rtl:right-auto rtl:left-6" id="closeMenuBtn">✕</button>
+    <ul class="flex flex-col gap-4 list-none m-0 p-0">
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2">
+        <div class="flex justify-between items-center py-2 cursor-pointer text-gray-800 dark:text-gray-200 font-medium mobile-dropdown-toggle" data-dropdown="dropdown1">
+          <span id="mobileHomeText">Home</span>
+          <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+        </div>
+        <div class="mobile-dropdown-content pl-4 rtl:pl-0 rtl:pr-4" id="dropdown1">
+          <a href="index.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">Home 1</a>
+          <a href="home2.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">Home 2</a>
+        </div>
+      </li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="about.html" class="block py-2 text-lg font-bold text-brand hover:text-brand-dark">About</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="service.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">Service</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="careplans.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">Care Plans</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="Gallery.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">Gallery</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="contact.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">Contact</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2">
+        <div class="flex justify-between items-center py-2 cursor-pointer text-gray-800 dark:text-gray-200 font-medium mobile-dropdown-toggle" data-dropdown="dropdown2">
+          <span id="mobileDashboardText">Dashboard</span>
+          <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+        </div>
+        <div class="mobile-dropdown-content pl-4 rtl:pl-0 rtl:pr-4" id="dropdown2">
+          <a href="user.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">User Dashboard</a>
+          <a href="admin.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">Admin Dashboard</a>
+        </div>
+      </li>
+      <li class="pt-4">
+        <div class="flex gap-4 mb-6">
+          <a href="login.html" class="flex-1 text-center py-3 rounded-full font-semibold border-2 border-brand text-brand dark:border-brand-light dark:text-brand-light">Login</a>
+          <a href="signup.html" class="flex-1 text-center py-3 rounded-full font-semibold bg-brand text-white hover:bg-brand-dark">Sign Up</a>
+        </div>
+        <div class="flex gap-4">
+          <button id="mobileDarkToggle" class="flex-1 py-2 rounded-full border-2 border-gray-200 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300">🌙 Dark</button>
+          <button id="mobileRtlToggle" class="flex-1 py-2 rounded-full border-2 border-gray-200 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300">LTR</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ================= ABOUT PAGE HERO BANNER ================= -->
+  <section class="relative min-h-[75vh] flex items-center justify-center text-center overflow-hidden isolate bg-gray-900">
+    <div class="absolute inset-0 -z-20">
+      <!-- Changed Images to fit an 'About' narrative (Seniors laughing, caregivers helping, community) -->
+      <div class="slider-image absolute inset-0 bg-cover bg-center opacity-100 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (11).jpg');"></div>
+      <div class="slider-image absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (10).jpg');"></div>
+      <div class="slider-image absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (1).jpg');"></div>
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-gray-900/80 to-gray-900/95 -z-10"></div>
+    <div class="max-w-4xl mx-auto px-6 py-24 text-white z-10">
+      <!-- Changed Content to fit About Page -->
+      <div class="text-sm md:text-base font-semibold tracking-[0.2em] uppercase mb-4 text-brand-light">Our Story & Mission</div>
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+        Redefining Senior Care <br>
+        <span class="font-normal italic text-brand-light text-4xl md:text-6xl mt-2 block">With dignity, respect, and joy</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">Founded on the belief that every senior deserves a vibrant, engaging, and safe environment to spend their days surrounded by friends and compassionate caregivers.</p>
+      <a href="#mission" class="inline-block bg-brand hover:bg-brand-dark text-white font-semibold py-4 px-10 rounded-full transition-transform hover:scale-105 shadow-lg">Discover Our Mission</a>
+    </div>
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
+      <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all scale-125 bg-brand border-2 border-white" aria-label="Slide 1"></button>
+      <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" aria-label="Slide 2"></button>
+      <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" aria-label="Slide 3"></button>
+    </div>
+  </section>
+
+  <!-- ================= MAIN CONTENT: 6 ABOUT US SECTIONS ================= -->
+  <main id="mission">
+
+    <!-- SECTION 1: Our Mission -->
+    <section class="py-20 bg-white dark:bg-gray-800 transition-colors">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+        <div class="w-full md:w-1/2">
+          <img src="images/eldercare (12).jpg" alt="Caregiver holding hands" class="rounded-3xl shadow-xl w-full h-auto object-cover">
+        </div>
+        <div class="w-full md:w-1/2">
+          <div class="inline-block bg-brand-light text-brand px-4 py-1.5 rounded-full text-sm font-bold mb-4 tracking-wide uppercase">Our Mission</div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Empowering Seniors to Live Joyfully</h2>
+          <p class="text-gray-600 dark:text-gray-400 text-lg mb-6 leading-relaxed">
+            Our mission is to elevate the quality of life for seniors by providing a supportive, stimulating, and secure environment. We believe that aging should be a journey filled with purpose, connection, and respect. 
+          </p>
+          <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-8">
+            Every program we design, every meal we serve, and every conversation we have is rooted in our commitment to enhancing the physical and emotional well-being of our community members.
+          </p>
+          <ul class="space-y-3 font-medium text-gray-800 dark:text-gray-200">
+            <li><i class="fa-solid fa-check text-brand mr-3"></i> Fostering daily social connections</li>
+            <li><i class="fa-solid fa-check text-brand mr-3"></i> Maintaining independence through physical activity</li>
+            <li><i class="fa-solid fa-check text-brand mr-3"></i> Providing peace of mind for families</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Our Vision -->
+    <section class="py-20 bg-brand/5 dark:bg-gray-900 transition-colors border-y border-gray-100 dark:border-gray-800">
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <div class="inline-block bg-white dark:bg-gray-800 text-brand px-4 py-1.5 rounded-full text-sm font-bold mb-4 tracking-wide uppercase shadow-sm border border-brand/20">Our Vision</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-12">Setting a New Standard for Senior Care</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700">
+            <div class="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center text-brand text-2xl mx-auto mb-6"><i class="fa-solid fa-house-chimney-medical"></i></div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Holistic Facilities</h3>
+            <p class="text-gray-600 dark:text-gray-400">We envision a future where elder care facilities feel completely like home, integrating advanced medical support seamlessly into comfortable living spaces.</p>
+          </div>
+          
+          <div class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700">
+            <div class="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center text-brand text-2xl mx-auto mb-6"><i class="fa-solid fa-globe"></i></div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Community Integration</h3>
+            <p class="text-gray-600 dark:text-gray-400">Breaking the isolation often associated with aging by fostering intergenerational programs and staying actively involved in the local community.</p>
+          </div>
+          
+          <div class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700">
+            <div class="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center text-brand text-2xl mx-auto mb-6"><i class="fa-solid fa-seedling"></i></div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Continuous Growth</h3>
+            <p class="text-gray-600 dark:text-gray-400">Pioneering new therapeutic techniques and cognitive activities to ensure that our members are always learning, growing, and experiencing joy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Our History (Non-jiggered, clean vertical layout) -->
+    <section class="py-20 bg-white dark:bg-gray-800 transition-colors">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <div class="inline-block bg-brand-light text-brand px-4 py-1.5 rounded-full text-sm font-bold mb-4 tracking-wide uppercase">Our History</div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">A Journey of Compassion</h2>
+        </div>
+        
+        <!-- Clean, solid left-aligned timeline to prevent jiggering across screen sizes -->
+        <div class="relative border-l-4 border-brand-light dark:border-gray-700 pl-8 space-y-12 py-4 ml-4 md:ml-12">
+          
+          <div class="relative">
+            <div class="absolute w-6 h-6 bg-brand rounded-full -left-[42px] top-1 border-4 border-white dark:border-gray-800 shadow-sm"></div>
+            <h3 class="text-2xl font-bold text-brand">2010</h3>
+            <h4 class="text-xl font-semibold text-gray-900 dark:text-white mt-1">Humble Beginnings</h4>
+            <p class="text-gray-600 dark:text-gray-400 mt-2">Started as a small weekly meetup group in a local community hall, providing a safe space for 10 seniors to play games and share meals.</p>
+          </div>
+
+          <div class="relative">
+            <div class="absolute w-6 h-6 bg-brand rounded-full -left-[42px] top-1 border-4 border-white dark:border-gray-800 shadow-sm"></div>
+            <h3 class="text-2xl font-bold text-brand">2015</h3>
+            <h4 class="text-xl font-semibold text-gray-900 dark:text-white mt-1">First Dedicated Facility</h4>
+            <p class="text-gray-600 dark:text-gray-400 mt-2">Opened our first official day care center, allowing us to operate 5 days a week and introduce professional nursing staff to our team.</p>
+          </div>
+
+          <div class="relative">
+            <div class="absolute w-6 h-6 bg-brand rounded-full -left-[42px] top-1 border-4 border-white dark:border-gray-800 shadow-sm"></div>
+            <h3 class="text-2xl font-bold text-brand">2020</h3>
+            <h4 class="text-xl font-semibold text-gray-900 dark:text-white mt-1">Expanding our Services</h4>
+            <p class="text-gray-600 dark:text-gray-400 mt-2">Added physical therapy, specialized memory care units, and a dedicated nutritional program to serve over 150 families.</p>
+          </div>
+
+          <div class="relative">
+            <div class="absolute w-6 h-6 bg-brand rounded-full -left-[42px] top-1 border-4 border-white dark:border-gray-800 shadow-sm"></div>
+            <h3 class="text-2xl font-bold text-brand">2026</h3>
+            <h4 class="text-xl font-semibold text-gray-900 dark:text-white mt-1">Leading the Industry</h4>
+            <p class="text-gray-600 dark:text-gray-400 mt-2">Today, we are a recognized leader in senior day care, continually innovating our activities and medical monitoring to support happy, healthy aging.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Core Values -->
+    <section class="py-20 bg-gray-900 text-white transition-colors relative overflow-hidden">
+      <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Core Values</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">The principles that guide every interaction, decision, and care plan.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-gray-800 p-8 rounded-3xl text-center border border-gray-700 hover:border-brand transition-colors">
+            <i class="fa-solid fa-heart text-4xl text-brand mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Compassion</h3>
+            <p class="text-gray-400 text-sm">We treat everyone with profound empathy and genuine warmth, just like family.</p>
+          </div>
+          
+          <div class="bg-gray-800 p-8 rounded-3xl text-center border border-gray-700 hover:border-brand transition-colors">
+            <i class="fa-solid fa-shield-halved text-4xl text-brand mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Safety</h3>
+            <p class="text-gray-400 text-sm">A secure environment and vigilant care protocols are the foundation of our center.</p>
+          </div>
+          
+          <div class="bg-gray-800 p-8 rounded-3xl text-center border border-gray-700 hover:border-brand transition-colors">
+            <i class="fa-solid fa-face-smile text-4xl text-brand mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Dignity</h3>
+            <p class="text-gray-400 text-sm">We deeply respect the life experiences, independence, and individuality of our seniors.</p>
+          </div>
+          
+          <div class="bg-gray-800 p-8 rounded-3xl text-center border border-gray-700 hover:border-brand transition-colors">
+            <i class="fa-solid fa-handshake-angle text-4xl text-brand mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Collaboration</h3>
+            <p class="text-gray-400 text-sm">We work closely with families and doctors to provide a unified, tailored care experience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Leadership Team -->
+    <section class="py-20 bg-white dark:bg-gray-800 transition-colors">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <div class="inline-block bg-brand-light text-brand px-4 py-1.5 rounded-full text-sm font-bold mb-4 tracking-wide uppercase">Leadership</div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Meet the Directors</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div class="text-center group">
+            <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 shadow-lg border-4 border-brand-light">
+              <img src="images/author (5).jpg" alt="Founder" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Margaret Lin</h3>
+            <p class="text-brand font-semibold mb-3">Founder & CEO</p>
+            <p class="text-gray-600 dark:text-gray-400 text-sm px-4">Founded ElderCare after struggling to find quality day care for her own parents.</p>
+          </div>
+
+          <div class="text-center group">
+            <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 shadow-lg border-4 border-brand-light">
+              <img src="images/author (4).jpg" alt="Medical Director" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Dr. Robert Hayes</h3>
+            <p class="text-brand font-semibold mb-3">Chief Medical Officer</p>
+            <p class="text-gray-600 dark:text-gray-400 text-sm px-4">Oversees all health protocols, ensuring our staff maintains rigorous medical standards.</p>
+          </div>
+
+          <div class="text-center group">
+            <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 shadow-lg border-4 border-brand-light">
+              <img src="images/author (2).jpg" alt="Operations Director" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Amanda Vance</h3>
+            <p class="text-brand font-semibold mb-3">Director of Operations</p>
+            <p class="text-gray-600 dark:text-gray-400 text-sm px-4">Ensures the facility runs smoothly every day, coordinating events, meals, and logistics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Community Impact & Call to Action -->
+    <section class="py-20 bg-brand/10 dark:bg-gray-900 transition-colors border-t border-gray-200 dark:border-gray-800">
+      <div class="max-w-5xl mx-auto px-6 text-center bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-10 md:p-16 border border-brand/20">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Be Part of Our Story</h2>
+        <p class="text-gray-600 dark:text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+          Whether you are looking for a welcoming environment for a loved one, seeking a fulfilling career in caregiving, or wanting to volunteer, there is a place for you in the ElderCare family.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="contact.html" class="bg-brand hover:bg-brand-dark text-white px-8 py-3 rounded-full font-bold transition-colors shadow-md">
+            Schedule a Visit
+          </a>
+          <a href="about.html" class="bg-transparent border-2 border-brand text-brand hover:bg-brand-light dark:hover:bg-gray-700 px-8 py-3 rounded-full font-bold transition-colors">
+            Volunteer With Us
+          </a>
+        </div>
+        <div class="mt-8 pt-8 border-t border-gray-100 dark:border-gray-700 flex justify-center gap-8 text-gray-500 dark:text-gray-400">
+          <div class="text-center"><span class="block text-2xl font-bold text-gray-900 dark:text-white">100+</span> Volunteers</div>
+          <div class="text-center"><span class="block text-2xl font-bold text-gray-900 dark:text-white">5k+</span> Hours Donated</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-gray-950 text-gray-300 pt-16 pb-8 border-t-4 border-brand">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      
+      <!-- Brand Column -->
+      <div>
+        <a href="index.html" class="flex items-center gap-3 no-underline mb-6">
+          <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center">
+            <i class="fa-solid fa-hands-holding-circle text-white text-xl"></i>
+          </div>
+          <span class="text-2xl font-bold tracking-tight text-white">
+            Elder<span class="text-brand">Care</span>
+          </span>
+        </a>
+        <p class="text-gray-400 text-sm leading-relaxed mb-6">Providing a safe, warm, and engaging day environment for seniors, offering peace of mind to families everywhere.</p>
+        <div class="flex gap-4">
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand hover:text-white transition-all"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      
+      <!-- QuickLinks -->
+      <div>
+        <h4 class="text-white text-lg font-semibold mb-6 uppercase tracking-wider text-sm">QuickLinks</h4>
+        <ul class="flex flex-col gap-3">
+          <li><a href="index.html" class="hover:text-brand transition-colors">Home</a></li>
+          <li><a href="contact.html" class="hover:text-brand transition-colors">Contact</a></li>
+          <li><a href="about.html" class="hover:text-brand transition-colors">About</a></li>
+          <li><a href="service.html" class="hover:text-brand transition-colors">Service</a></li>
+          <li><a href="signup.html" class="hover:text-brand transition-colors">Signup</a></li>
+        </ul>
+      </div>
+      
+      <!-- Resources -->
+      <div>
+        <h4 class="text-white text-lg font-semibold mb-6 uppercase tracking-wider text-sm">Resources</h4>
+        <ul class="flex flex-col gap-3">
+          <li><a href="#" class="hover:text-brand transition-colors">Activities Schedule</a></li>
+          <li><a href="#" class="hover:text-brand transition-colors">Health Guidelines</a></li>
+          <li><a href="#" class="hover:text-brand transition-colors">Careers</a></li>
+          <li><a href="#" class="hover:text-brand transition-colors">Family Portal</a></li>
+        </ul>
+      </div>
+      
+      <!-- Newsletter -->
+      <div>
+        <h4 class="text-white text-lg font-semibold mb-6 uppercase tracking-wider text-sm">Stay Updated</h4>
+        <p class="text-gray-400 text-sm mb-4">Subscribe for monthly newsletters and center updates.</p>
+        <div class="flex border-b border-gray-700 pb-2 focus-within:border-brand transition-colors">
+          <input type="email" placeholder="Your email address" class="bg-transparent w-full outline-none text-white placeholder-gray-500">
+          <button class="text-brand hover:text-white transition-colors font-bold px-2">→</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+      <span>© 2026 Elder Care Center. All rights reserved.</span>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-brand transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-brand transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-brand transition-colors">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 1. Dark Mode Logic
+      const html = document.documentElement;
+      const darkToggleBtns = [document.getElementById('darkToggleBtn'), document.getElementById('mobileDarkToggle')];
+      
+      const setDarkMode = (isDark) => {
+        if (isDark) {
+          html.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          html.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+        if(darkToggleBtns[0]) darkToggleBtns[0].textContent = isDark ? '☀️' : '🌙';
+        if(darkToggleBtns[1]) darkToggleBtns[1].textContent = isDark ? '☀️ Light' : '🌙 Dark';
+      };
+
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        setDarkMode(true);
+      } else {
+        setDarkMode(false);
+      }
+
+      darkToggleBtns.forEach(btn => {
+        if(btn) btn.addEventListener('click', () => setDarkMode(!html.classList.contains('dark')));
+      });
+
+      // 2. RTL Logic
+      const rtlToggleBtns = [document.getElementById('rtlToggleBtn'), document.getElementById('mobileRtlToggle')];
+      const setRTL = (isRTL) => {
+        html.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+        localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr');
+        rtlToggleBtns.forEach(btn => {
+          if(btn) btn.textContent = isRTL ? 'LTR' : 'RTL';
+        });
+      };
+      
+      if (localStorage.getItem('dir') === 'rtl') setRTL(true);
+      
+      rtlToggleBtns.forEach(btn => {
+        if(btn) btn.addEventListener('click', () => setRTL(html.getAttribute('dir') !== 'rtl'));
+      });
+
+      // 3. Mobile Menu & Overlay Logic
+      const hamburger = document.getElementById('hamburgerBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileOverlay');
+      const closeMenu = document.getElementById('closeMenuBtn');
+      
+      const toggleMenu = (show) => {
+        if (show) {
+          mobileMenu.classList.add('active');
+          overlay.classList.remove('opacity-0', 'invisible');
+          overlay.classList.add('opacity-100', 'visible');
+          document.body.classList.add('menu-open');
+        } else {
+          mobileMenu.classList.remove('active');
+          overlay.classList.add('opacity-0', 'invisible');
+          overlay.classList.remove('opacity-100', 'visible');
+          document.body.classList.remove('menu-open');
+        }
+      };
+
+      hamburger?.addEventListener('click', () => toggleMenu(true));
+      closeMenu?.addEventListener('click', () => toggleMenu(false));
+      overlay?.addEventListener('click', () => toggleMenu(false));
+
+      // Mobile Dropdowns
+      document.querySelectorAll('.mobile-dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-dropdown');
+          const content = document.getElementById(targetId);
+          const icon = this.querySelector('i');
+          
+          if (content) {
+            content.classList.toggle('active');
+            if (icon) {
+              icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : '';
+            }
+          }
+        });
+      });
+
+      // 4. Hero Slider Logic
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slider-image');
+      const dots = document.querySelectorAll('.dot');
+      
+      const showSlide = (index) => {
+        slides.forEach((slide, i) => {
+          slide.style.opacity = i === index ? '1' : '0';
+        });
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add('scale-125', 'bg-brand', 'border-2', 'border-white');
+            dot.classList.remove('bg-white/50');
+          } else {
+            dot.classList.remove('scale-125', 'bg-brand', 'border-2', 'border-white');
+            dot.classList.add('bg-white/50');
+          }
+        });
+        currentSlide = index;
+      };
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+      });
+
+      setInterval(() => {
+        const nextSlide = (currentSlide + 1) % slides.length;
+        showSlide(nextSlide);
+      }, 5000);
+
+    });
+  </script>
+</body>
+</html>

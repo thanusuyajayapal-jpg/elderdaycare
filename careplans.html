@@ -1,0 +1,551 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Care Plans - Elder Day Care & Senior Activity Center</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration for Dark Mode & Custom Colors -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              light: '#fce7f3', 
+              DEFAULT: '#f472b6', 
+              dark: '#db2777', 
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    body.menu-open { overflow: hidden; }
+    .mobile-drawer { right: -100%; transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+    .mobile-drawer.active { right: 0; }
+    [dir="rtl"] .mobile-drawer { right: auto; left: -100%; }
+    [dir="rtl"] .mobile-drawer.active { left: 0; right: auto; }
+    .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .mobile-dropdown-content.active { max-height: 300px; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
+
+  <!-- ================= HEADER & NAVBAR ================= -->
+  <header class="sticky top-0 w-full bg-white dark:bg-gray-800 shadow-sm z-50 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 no-underline group">
+        <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center transition-transform group-hover:scale-105">
+          <i class="fa-solid fa-hands-holding-circle text-white text-xl"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Elder<span class="text-brand">Care</span>
+        </span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <ul class="hidden xl:flex gap-8 list-none items-center m-0 p-0">
+        <li class="relative group">
+          <a href="#" id="navHome" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1 flex items-center gap-1">Home <i class="fa-solid fa-chevron-down text-[10px]"></i></a>
+          <ul class="absolute top-full -left-4 bg-white dark:bg-gray-700 min-w-[200px] rounded-xl shadow-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all z-50 flex flex-col">
+            <li><a href="index.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">Home 1</a></li>
+            <li><a href="home2.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">Home 2</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html" id="navAbout" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">About</a></li>
+        <li><a href="service.html" id="navService" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">Service</a></li>
+        <li><a href="careplans.html" id="navcareplans" class="font-medium text-brand border-b-2 border-brand pb-1">Care Plans</a></li>
+        <li><a href="Gallery.html" id="navGallery" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">Gallery</a></li>
+        <li><a href="contact.html" id="navContact" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1">Contact</a></li>
+        <li class="relative group">
+          <a href="#" id="navDashboard" class="font-medium text-gray-600 dark:text-gray-300 hover:text-brand transition-colors pb-1 flex items-center gap-1">Dashboard <i class="fa-solid fa-chevron-down text-[10px]"></i></a>
+          <ul class="absolute top-full -left-4 bg-white dark:bg-gray-700 min-w-[200px] rounded-xl shadow-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all z-50 flex flex-col">
+            <li><a href="user.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">User Dashboard</a></li>
+            <li><a href="admin.html" class="block px-6 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:text-brand hover:bg-brand-light dark:hover:bg-gray-600 transition-colors">Admin Dashboard</a></li>
+          </ul>
+        </li>
+      </ul>
+      
+      <!-- Desktop Actions -->
+      <div class="hidden xl:flex items-center gap-4">
+        <a href="login.html" class="px-6 py-2 rounded-full text-sm font-semibold border-2 border-brand text-brand hover:bg-brand hover:text-white transition-all dark:border-brand-light dark:text-brand-light dark:hover:bg-brand-light dark:hover:text-gray-900">Login</a>
+        <button id="darkToggleBtn" class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-brand text-gray-600 dark:text-gray-300 transition-all">🌙</button>
+        <button id="rtlToggleBtn" class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-brand text-gray-600 dark:text-gray-300 text-xs font-bold transition-all">LTR</button>
+      </div>
+      
+      <!-- Hamburger Menu (Mobile) -->
+      <button class="xl:hidden flex flex-col justify-between w-7 h-5 cursor-pointer bg-transparent border-none z-[1001] group" id="hamburgerBtn" aria-label="Menu">
+        <span class="w-full h-[2px] bg-brand dark:bg-brand-light rounded transition-all group-hover:bg-brand-dark"></span>
+        <span class="w-full h-[2px] bg-brand dark:bg-brand-light rounded transition-all group-hover:bg-brand-dark"></span>
+        <span class="w-full h-[2px] bg-brand dark:bg-brand-light rounded transition-all group-hover:bg-brand-dark"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= MOBILE MENU OVERLAY ================= -->
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[998] opacity-0 invisible transition-all duration-300" id="mobileOverlay"></div>
+  
+  <div class="mobile-drawer fixed top-0 w-[85%] max-w-[400px] h-screen bg-white dark:bg-gray-800 z-[1001] p-8 pt-24 overflow-y-auto shadow-2xl" id="mobileMenu">
+    <button class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full text-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors rtl:right-auto rtl:left-6" id="closeMenuBtn">✕</button>
+    <ul class="flex flex-col gap-4 list-none m-0 p-0">
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2">
+        <div class="flex justify-between items-center py-2 cursor-pointer text-gray-800 dark:text-gray-200 font-medium mobile-dropdown-toggle" data-dropdown="dropdown1">
+          <span id="mobileHomeText">Home</span>
+          <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+        </div>
+        <div class="mobile-dropdown-content pl-4 rtl:pl-0 rtl:pr-4" id="dropdown1">
+          <a href="index.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">Home 1</a>
+          <a href="home2.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">Home 2</a>
+        </div>
+      </li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="about.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">About</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="service.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">Service</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="careplans.html" class="block py-2 text-lg font-bold text-brand hover:text-brand-dark">Care Plans</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="Gallery.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">Gallery</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2"><a href="contact.html" class="block py-2 text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-brand">Contact</a></li>
+      <li class="border-b border-gray-100 dark:border-gray-700 pb-2">
+        <div class="flex justify-between items-center py-2 cursor-pointer text-gray-800 dark:text-gray-200 font-medium mobile-dropdown-toggle" data-dropdown="dropdown2">
+          <span id="mobileDashboardText">Dashboard</span>
+          <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+        </div>
+        <div class="mobile-dropdown-content pl-4 rtl:pl-0 rtl:pr-4" id="dropdown2">
+          <a href="user.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">User Dashboard</a>
+          <a href="admin.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-brand">Admin Dashboard</a>
+        </div>
+      </li>
+      <li class="pt-4">
+        <div class="flex gap-4 mb-6">
+          <a href="login.html" class="flex-1 text-center py-3 rounded-full font-semibold border-2 border-brand text-brand dark:border-brand-light dark:text-brand-light">Login</a>
+          <a href="signup.html" class="flex-1 text-center py-3 rounded-full font-semibold bg-brand text-white hover:bg-brand-dark">Sign Up</a>
+        </div>
+        <div class="flex gap-4">
+          <button id="mobileDarkToggle" class="flex-1 py-2 rounded-full border-2 border-gray-200 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300">🌙 Dark</button>
+          <button id="mobileRtlToggle" class="flex-1 py-2 rounded-full border-2 border-gray-200 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300">LTR</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ================= CARE PLANS PAGE HERO BANNER ================= -->
+  <section class="relative min-h-[75vh] flex items-center justify-center text-center overflow-hidden isolate bg-gray-900">
+    <div class="absolute inset-0 -z-20">
+      <!-- Images updated for Care Plans (Planning, family, discussions) -->
+      <div class="slider-image absolute inset-0 bg-cover bg-center opacity-100 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (14).jpg');"></div>
+      <div class="slider-image absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (13).jpg');"></div>
+      <div class="slider-image absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (12).jpg');"></div>
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-gray-900/80 to-gray-900/95 -z-10"></div>
+    <div class="max-w-4xl mx-auto px-6 py-24 text-white z-10">
+      <div class="text-sm md:text-base font-semibold tracking-[0.2em] uppercase mb-4 text-brand-light">Flexible Solutions</div>
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+        Custom Care Plans <br>
+        <span class="font-normal italic text-brand-light text-4xl md:text-6xl mt-2 block">Because every senior is unique</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">We offer a variety of structured enrollment plans, from occasional drop-ins to full-time dedicated memory care, ensuring your family finds the perfect fit.</p>
+      <a href="#plans" class="inline-block bg-brand hover:bg-brand-dark text-white font-semibold py-4 px-10 rounded-full transition-transform hover:scale-105 shadow-lg">View Our Memberships</a>
+    </div>
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
+      <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all scale-125 bg-brand border-2 border-white" aria-label="Slide 1"></button>
+      <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" aria-label="Slide 2"></button>
+      <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" aria-label="Slide 3"></button>
+    </div>
+  </section>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main id="plans">
+
+    <!-- SECTION 1: Membership Pricing Cards -->
+    <section class="py-24 bg-white dark:bg-gray-800 transition-colors border-b border-gray-100 dark:border-gray-700">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-brand font-bold uppercase tracking-wider text-sm mb-2 block">Enrollment Options</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Choose the Right Plan</h2>
+          <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto text-lg">No hidden fees, no long-term contracts. Just simple, transparent pricing designed around your loved one's needs.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-end max-w-6xl mx-auto">
+          <!-- Tier 1 -->
+          <div class="bg-gray-50 dark:bg-gray-700 rounded-3xl p-8 border border-gray-200 dark:border-gray-600 text-center relative group hover:border-brand transition-colors">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Drop-In / Half Day</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Perfect for occasional respite care.</p>
+            <div class="text-4xl font-black text-brand mb-8">$45 <span class="text-lg font-medium text-gray-500 dark:text-gray-400">/day</span></div>
+            <ul class="text-left space-y-4 mb-8 text-gray-700 dark:text-gray-300 font-medium">
+              <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Up to 4 hours of care</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> 1 Nutritious meal included</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Group social activities</li>
+            </ul>
+            <a href="contact.html" class="block w-full py-4 rounded-xl border-2 border-brand text-brand font-bold hover:bg-brand hover:text-white transition-colors">Select Plan</a>
+          </div>
+          
+          <!-- Tier 2 (Highlighted) -->
+          <div class="bg-gradient-to-b from-brand to-brand-dark rounded-3xl p-8 border border-brand-light text-center relative shadow-2xl transform md:-translate-y-4">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white text-brand px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-md">Most Popular</div>
+            <h3 class="text-xl font-bold text-white mb-2">Full Monthly Plan</h3>
+            <p class="text-brand-light text-sm mb-6">Comprehensive care for active seniors.</p>
+            <div class="text-5xl font-black text-white mb-8">$850 <span class="text-lg font-medium text-brand-light">/month</span></div>
+            <ul class="text-left space-y-4 mb-8 text-white font-medium">
+              <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-white"></i> 5 Days/Week (8am - 6pm)</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-white"></i> All meals & dietary snacks</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-white"></i> Physical Therapy access</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-white"></i> Monthly Doctor Consultations</li>
+            </ul>
+            <a href="contact.html" class="block w-full py-4 rounded-xl bg-white text-brand font-bold hover:bg-gray-100 transition-colors shadow-lg">Enroll Now</a>
+          </div>
+          
+          <!-- Tier 3 -->
+          <div class="bg-gray-50 dark:bg-gray-700 rounded-3xl p-8 border border-gray-200 dark:border-gray-600 text-center relative group hover:border-brand transition-colors">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Specialized Care</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">For members needing memory/dementia care.</p>
+            <div class="text-4xl font-black text-brand mb-8">$1,200 <span class="text-lg font-medium text-gray-500 dark:text-gray-400">/month</span></div>
+            <ul class="text-left space-y-4 mb-8 text-gray-700 dark:text-gray-300 font-medium">
+              <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Secure Memory Care Wing</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> 1-on-1 Caregiver support</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Specialized cognitive therapy</li>
+            </ul>
+            <a href="contact.html" class="block w-full py-4 rounded-xl border-2 border-brand text-brand font-bold hover:bg-brand hover:text-white transition-colors">Select Plan</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Feature Comparison Table -->
+    <section class="py-24 bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">Plan Feature Comparison</h2>
+        <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-200 dark:border-gray-700">
+          <table class="w-full text-left border-collapse min-w-[700px]">
+            <thead>
+              <tr class="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white text-sm uppercase tracking-wider">
+                <th class="p-6 font-bold w-1/3 rounded-tl-3xl">Care Features</th>
+                <th class="p-6 font-bold text-center border-l border-gray-200 dark:border-gray-600">Drop-In</th>
+                <th class="p-6 font-bold text-center border-l border-gray-200 dark:border-gray-600 text-brand">Monthly</th>
+                <th class="p-6 font-bold text-center border-l border-gray-200 dark:border-gray-600 rounded-tr-3xl">Specialized</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-700 dark:text-gray-300">
+              <tr class="border-t border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <td class="p-6 font-medium">Basic Vitals Monitoring</td>
+                <td class="p-6 text-center text-brand"><i class="fa-solid fa-check"></i></td>
+                <td class="p-6 text-center text-brand border-l border-gray-100 dark:border-gray-700"><i class="fa-solid fa-check"></i></td>
+                <td class="p-6 text-center text-brand border-l border-gray-100 dark:border-gray-700"><i class="fa-solid fa-check"></i></td>
+              </tr>
+              <tr class="border-t border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <td class="p-6 font-medium">Group Social Activities</td>
+                <td class="p-6 text-center text-brand"><i class="fa-solid fa-check"></i></td>
+                <td class="p-6 text-center text-brand border-l border-gray-100 dark:border-gray-700"><i class="fa-solid fa-check"></i></td>
+                <td class="p-6 text-center text-brand border-l border-gray-100 dark:border-gray-700"><i class="fa-solid fa-check"></i></td>
+              </tr>
+              <tr class="border-t border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <td class="p-6 font-medium">Full Dietitian Meals (3x)</td>
+                <td class="p-6 text-center text-gray-400"><i class="fa-solid fa-minus"></i></td>
+                <td class="p-6 text-center text-brand border-l border-gray-100 dark:border-gray-700"><i class="fa-solid fa-check"></i></td>
+                <td class="p-6 text-center text-brand border-l border-gray-100 dark:border-gray-700"><i class="fa-solid fa-check"></i></td>
+              </tr>
+              <tr class="border-t border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <td class="p-6 font-medium">Transportation / Shuttle</td>
+                <td class="p-6 text-center text-gray-400"><i class="fa-solid fa-minus"></i></td>
+                <td class="p-6 text-center text-gray-400 border-l border-gray-100 dark:border-gray-700"><i class="fa-solid fa-minus"></i> <span class="text-xs ml-1">(Optional Add-on)</span></td>
+                <td class="p-6 text-center text-brand border-l border-gray-100 dark:border-gray-700"><i class="fa-solid fa-check"></i></td>
+              </tr>
+              <tr class="border-t border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <td class="p-6 font-medium">1-on-1 Cognitive Therapy</td>
+                <td class="p-6 text-center text-gray-400 rounded-bl-3xl"><i class="fa-solid fa-minus"></i></td>
+                <td class="p-6 text-center text-gray-400 border-l border-gray-100 dark:border-gray-700"><i class="fa-solid fa-minus"></i></td>
+                <td class="p-6 text-center text-brand border-l border-gray-100 dark:border-gray-700 rounded-br-3xl"><i class="fa-solid fa-check"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Add-on Services & Transportation Highlights -->
+    <section class="py-24 bg-white dark:bg-gray-800 transition-colors border-y border-brand/10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+          <div class="w-full lg:w-1/2">
+            <img src="images/eldercare (13).jpg" alt="Specialized Care Transport" class="rounded-[2.5rem] shadow-xl w-full h-auto object-cover border border-gray-100 dark:border-gray-700">
+          </div>
+          <div class="w-full lg:w-1/2">
+            <span class="text-brand font-bold uppercase tracking-wider text-sm mb-2 block">Need Extra Help?</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Optional Add-On Services</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg">We understand that scheduling can be difficult. That's why we offer à la carte services that can be appended to any basic or monthly membership plan.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-2xl border border-gray-200 dark:border-gray-600">
+                <i class="fa-solid fa-van-shuttle text-2xl text-brand mb-3"></i>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-1">Door-to-Door Transit</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">Safe, wheelchair-accessible transport to and from the center.</p>
+                <span class="font-bold text-brand">$150 / mo</span>
+              </div>
+              
+              <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-2xl border border-gray-200 dark:border-gray-600">
+                <i class="fa-solid fa-scissors text-2xl text-brand mb-3"></i>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-1">Salon & Grooming</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">On-site haircuts, styling, and basic grooming by professionals.</p>
+                <span class="font-bold text-brand">$35 / session</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: FAQ for Care Plans -->
+    <section class="py-24 bg-brand/5 dark:bg-gray-900 transition-colors">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Membership Questions</h2>
+          <p class="text-gray-600 dark:text-gray-400 text-lg">Common questions regarding our billing, plans, and admissions process.</p>
+        </div>
+        
+        <div class="space-y-4">
+          <details class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-gray-900 dark:text-white text-lg">
+              Can I change my plan later?
+              <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-brand"></i></span>
+            </summary>
+            <div class="px-6 pb-6 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
+              Yes, absolutely. We operate on a month-to-month basis without locking you into rigid long-term contracts. If your loved one's needs increase or decrease, simply notify our billing department by the 15th of the month to adjust your tier for the following cycle.
+            </div>
+          </details>
+          
+          <details class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-gray-900 dark:text-white text-lg">
+              Is financial assistance or insurance accepted?
+              <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-brand"></i></span>
+            </summary>
+            <div class="px-6 pb-6 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
+              We accept several major long-term care insurance policies as well as Medicaid (for eligible participants). We also partner with local state programs to provide subsidized care tiers for lower-income families. Please call our admissions office for a detailed review of your benefits.
+            </div>
+          </details>
+          
+          <details class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-gray-900 dark:text-white text-lg">
+              What happens if my loved one misses a day?
+              <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-brand"></i></span>
+            </summary>
+            <div class="px-6 pb-6 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
+              For monthly plan members, we unfortunately cannot refund individual missed days due to illness or personal reasons. However, if a prolonged absence (over 5 consecutive days) occurs due to hospitalization, we can pause billing or apply a prorated credit to the next month's invoice.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: CTA Enrollment Block -->
+    <section class="py-20 bg-gray-900 text-white relative overflow-hidden">
+      <!-- Background pattern -->
+      <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+      
+      <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+        <div class="bg-brand rounded-[3rem] p-12 md:p-16 border border-brand-light shadow-2xl relative overflow-hidden isolate">
+          <!-- decorative circle -->
+          <div class="absolute -top-24 -right-24 w-64 h-64 bg-white/20 rounded-full blur-3xl -z-10"></div>
+          
+          <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">Take the First Step Towards Better Care</h2>
+          <p class="text-brand-light text-lg mb-10 max-w-2xl mx-auto">Not sure which plan is right for you? Schedule a free, no-obligation consultation with our care directors today to build a custom schedule.</p>
+          
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="contact.html" class="bg-white text-brand hover:bg-gray-100 px-10 py-4 rounded-full font-bold text-lg transition-colors shadow-lg">Book a Free Consultation</a>
+            <a href="contact.html" class="bg-transparent border-2 border-white text-white hover:bg-white/20 px-10 py-4 rounded-full font-bold text-lg transition-colors">Call (800) 555-0198</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-gray-950 text-gray-300 pt-16 pb-8 border-t-4 border-brand">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      
+      <div>
+        <a href="index.html" class="flex items-center gap-3 no-underline mb-6">
+          <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center">
+            <i class="fa-solid fa-hands-holding-circle text-white text-xl"></i>
+          </div>
+          <span class="text-2xl font-bold tracking-tight text-white">
+            Elder<span class="text-brand">Care</span>
+          </span>
+        </a>
+        <p class="text-gray-400 text-sm leading-relaxed mb-6">Providing a safe, warm, and engaging day environment for seniors, offering peace of mind to families everywhere.</p>
+        <div class="flex gap-4">
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand hover:text-white transition-all"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="text-white text-lg font-semibold mb-6 uppercase tracking-wider text-sm">QuickLinks</h4>
+        <ul class="flex flex-col gap-3">
+          <li><a href="index.html" class="hover:text-brand transition-colors">Home</a></li>
+          <li><a href="contact.html" class="hover:text-brand transition-colors">Contact</a></li>
+          <li><a href="about.html" class="hover:text-brand transition-colors">About</a></li>
+          <li><a href="service.html" class="hover:text-brand transition-colors">Service</a></li>
+          <li><a href="signup.html" class="hover:text-brand transition-colors">Signup</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-white text-lg font-semibold mb-6 uppercase tracking-wider text-sm">Resources</h4>
+        <ul class="flex flex-col gap-3">
+          <li><a href="#" class="hover:text-brand transition-colors">Activities Schedule</a></li>
+          <li><a href="#" class="hover:text-brand transition-colors">Health Guidelines</a></li>
+          <li><a href="#" class="hover:text-brand transition-colors">Careers</a></li>
+          <li><a href="#" class="hover:text-brand transition-colors">Family Portal</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-white text-lg font-semibold mb-6 uppercase tracking-wider text-sm">Stay Updated</h4>
+        <p class="text-gray-400 text-sm mb-4">Subscribe for monthly newsletters and center updates.</p>
+        <div class="flex border-b border-gray-700 pb-2 focus-within:border-brand transition-colors">
+          <input type="email" placeholder="Your email address" class="bg-transparent w-full outline-none text-white placeholder-gray-500">
+          <button class="text-brand hover:text-white transition-colors font-bold px-2">→</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+      <span>© 2026 Elder Care Center. All rights reserved.</span>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-brand transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-brand transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-brand transition-colors">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      const html = document.documentElement;
+      const darkToggleBtns = [document.getElementById('darkToggleBtn'), document.getElementById('mobileDarkToggle')];
+      
+      const setDarkMode = (isDark) => {
+        if (isDark) {
+          html.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          html.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+        if(darkToggleBtns[0]) darkToggleBtns[0].textContent = isDark ? '☀️' : '🌙';
+        if(darkToggleBtns[1]) darkToggleBtns[1].textContent = isDark ? '☀️ Light' : '🌙 Dark';
+      };
+
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        setDarkMode(true);
+      } else {
+        setDarkMode(false);
+      }
+
+      darkToggleBtns.forEach(btn => {
+        if(btn) btn.addEventListener('click', () => setDarkMode(!html.classList.contains('dark')));
+      });
+
+      const rtlToggleBtns = [document.getElementById('rtlToggleBtn'), document.getElementById('mobileRtlToggle')];
+      const setRTL = (isRTL) => {
+        html.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+        localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr');
+        rtlToggleBtns.forEach(btn => {
+          if(btn) btn.textContent = isRTL ? 'LTR' : 'RTL';
+        });
+      };
+      
+      if (localStorage.getItem('dir') === 'rtl') setRTL(true);
+      
+      rtlToggleBtns.forEach(btn => {
+        if(btn) btn.addEventListener('click', () => setRTL(html.getAttribute('dir') !== 'rtl'));
+      });
+
+      const hamburger = document.getElementById('hamburgerBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileOverlay');
+      const closeMenu = document.getElementById('closeMenuBtn');
+      
+      const toggleMenu = (show) => {
+        if (show) {
+          mobileMenu.classList.add('active');
+          overlay.classList.remove('opacity-0', 'invisible');
+          overlay.classList.add('opacity-100', 'visible');
+          document.body.classList.add('menu-open');
+        } else {
+          mobileMenu.classList.remove('active');
+          overlay.classList.add('opacity-0', 'invisible');
+          overlay.classList.remove('opacity-100', 'visible');
+          document.body.classList.remove('menu-open');
+        }
+      };
+
+      hamburger?.addEventListener('click', () => toggleMenu(true));
+      closeMenu?.addEventListener('click', () => toggleMenu(false));
+      overlay?.addEventListener('click', () => toggleMenu(false));
+
+      document.querySelectorAll('.mobile-dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-dropdown');
+          const content = document.getElementById(targetId);
+          const icon = this.querySelector('i');
+          
+          if (content) {
+            content.classList.toggle('active');
+            if (icon) {
+              icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : '';
+            }
+          }
+        });
+      });
+
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slider-image');
+      const dots = document.querySelectorAll('.dot');
+      
+      const showSlide = (index) => {
+        slides.forEach((slide, i) => {
+          slide.style.opacity = i === index ? '1' : '0';
+        });
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add('scale-125', 'bg-brand', 'border-2', 'border-white');
+            dot.classList.remove('bg-white/50');
+          } else {
+            dot.classList.remove('scale-125', 'bg-brand', 'border-2', 'border-white');
+            dot.classList.add('bg-white/50');
+          }
+        });
+        currentSlide = index;
+      };
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+      });
+
+      setInterval(() => {
+        const nextSlide = (currentSlide + 1) % slides.length;
+        showSlide(nextSlide);
+      }, 5000);
+
+    });
+  </script>
+</body>
+</html>
