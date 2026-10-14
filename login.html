@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -35,10 +35,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans h-screen w-screen relative flex items-center justify-center p-4 overflow-hidden">
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans min-h-screen min-h-[100dvh] w-full relative flex flex-col items-center justify-center p-4 py-6 sm:py-10 overflow-x-hidden overflow-y-auto">
 
   <!-- BACKGROUND EFFECTS -->
-  <div class="absolute inset-0 z-0 overflow-hidden">
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
       <!-- Soft Brand Blobs -->
       <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-brand/20 dark:bg-brand/10 blur-[120px]"></div>
       <div class="absolute top-[60%] -right-[10%] w-[40%] h-[50%] rounded-full bg-purple-500/10 blur-[120px]"></div>
@@ -47,19 +47,24 @@
       <div class="absolute inset-0 opacity-20 dark:opacity-5" style="background-image: radial-gradient(circle at 2px 2px, #f472b6 1px, transparent 0); background-size: 32px 32px;"></div>
   </div>
 
-  <!-- Dark mode toggle & Back button -->
-  <div class="absolute top-6 end-6 z-20 flex items-center gap-3">
-    
-      <button id="darkToggleBtn" class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand hover:border-brand transition-all shadow-sm">
-          🌙
-      </button>
-      <button id="rtlToggleBtn" class="h-10 px-3 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 font-bold text-xs hover:bg-brand hover:text-white dark:hover:bg-brand hover:border-brand transition-all shadow-sm">
-          LTR
-      </button>
+  <!-- TOP NAVIGATION CONTROLS (Back to Home, Dark mode, RTL) -->
+  <div class="w-full max-w-4xl flex items-center justify-between mb-3 sm:mb-4 px-1 z-20">
+      <a href="index.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 sm:py-2 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border border-gray-200/80 dark:border-gray-700/80 text-gray-700 dark:text-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white hover:border-brand transition-all text-xs sm:text-sm font-semibold shadow-sm group">
+          <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5 rtl:rotate-180"></i>
+          <span>Home</span>
+      </a>
+      <div class="flex items-center gap-2 sm:gap-2.5">
+          <button id="darkToggleBtn" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border border-gray-200/80 dark:border-gray-700/80 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand hover:border-brand transition-all shadow-sm text-sm" title="Toggle dark mode" aria-label="Toggle dark mode">
+              🌙
+          </button>
+          <button id="rtlToggleBtn" class="h-9 px-3 sm:h-10 sm:px-3.5 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border border-gray-200/80 dark:border-gray-700/80 flex items-center justify-center text-gray-600 dark:text-gray-300 font-bold text-xs hover:bg-brand hover:text-white dark:hover:bg-brand hover:border-brand transition-all shadow-sm" title="Toggle RTL/LTR" aria-label="Toggle text direction">
+              LTR
+          </button>
+      </div>
   </div>
 
   <!-- CENTERED CARD -->
-  <div class="w-full max-w-4xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-2xl border border-white/40 dark:border-gray-700/50 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] flex flex-col md:flex-row overflow-hidden relative z-10" style="max-height: 90vh;">
+  <div class="w-full max-w-4xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-2xl border border-white/40 dark:border-gray-700/50 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] flex flex-col md:flex-row overflow-hidden relative z-10">
       
       <!-- FORM SIDE -->
       <div class="w-full md:w-1/2 p-6 sm:p-10 flex flex-col justify-center">

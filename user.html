@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -96,6 +96,73 @@
             border-color: var(--accent-color);
         }
 
+        /* HAMBURGER BUTTON */
+        .hamburger-btn {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px;
+            transition: all 0.2s ease;
+            color: var(--text-main);
+            flex-shrink: 0;
+        }
+        .hamburger-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .hamburger-btn span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background-color: currentColor;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* SIDEBAR OVERLAY */
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* SIDEBAR CLOSE BUTTON */
+        .sidebar-close-btn {
+            display: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .sidebar-close-btn:hover {
+            color: #ef4444;
+            border-color: #fca5a5;
+        }
+
         /* DASHBOARD LAYOUT */
         .sidebar {
             width: 280px;
@@ -104,6 +171,7 @@
             display: flex;
             flex-direction: column;
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
         .main-content {
             flex: 1;
@@ -111,6 +179,7 @@
             flex-direction: column;
             overflow: hidden;
             background-color: var(--bg-color);
+            min-width: 0;
         }
         .topbar {
             height: 70px;
@@ -120,11 +189,72 @@
             justify-content: space-between;
             padding: 0 24px;
             background-color: var(--sidebar-bg);
+            transition: background-color 0.3s;
         }
         .content-area {
             flex: 1;
             overflow-y: auto;
             padding: 32px;
+        }
+
+        /* TABLET & MOBILE RESPONSIVE (Up to 1024px) */
+        @media (max-width: 1024px) {
+            .hamburger-btn {
+                display: flex;
+            }
+            .sidebar-close-btn {
+                display: flex;
+            }
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                width: 280px;
+                max-width: 85vw;
+                height: 100vh;
+                height: 100dvh;
+                z-index: 1050;
+                transform: translateX(-100%);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            [dir="rtl"] .sidebar {
+                left: auto;
+                right: 0;
+                border-right: none;
+                border-left: 1px solid var(--border-color);
+                transform: translateX(100%);
+            }
+            [dir="rtl"] .sidebar.active {
+                transform: translateX(0);
+            }
+            .topbar {
+                height: 64px;
+                padding: 0 16px;
+            }
+            .content-area {
+                padding: 16px;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .sidebar-overlay {
+                display: none !important;
+            }
+            .sidebar-close-btn {
+                display: none !important;
+            }
+            .hamburger-btn {
+                display: none !important;
+            }
+            [dir="rtl"] .sidebar {
+                border-right: none;
+                border-left: 1px solid var(--border-color);
+            }
         }
 
         /* SIDEBAR LINKS */
@@ -198,10 +328,13 @@
 
 <body>
 
+    <!-- SIDEBAR OVERLAY (Mobile & Tablet) -->
+    <div id="sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
         <!-- LOGO HEADER -->
-        <div class="h-[70px] flex items-center px-6 border-b border-[var(--border-color)] shrink-0">
+        <div class="h-[70px] flex items-center justify-between px-6 border-b border-[var(--border-color)] shrink-0">
             <!-- 100% IDENTICAL LOGO AS REQUESTED -->
             <a href="index.html" class="flex items-center gap-3 no-underline group w-max">
                 <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center transition-transform group-hover:scale-105 shadow-md">
@@ -211,6 +344,10 @@
                     Elder<span class="text-brand">Care</span>
                 </span>
             </a>
+            <!-- Mobile/Tablet Close Button -->
+            <button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="Close sidebar menu">
+                <i class="fas fa-times text-base"></i>
+            </button>
         </div>
 
         <div class="flex-1 py-6 space-y-1 overflow-y-auto" id="sidebar-menu">
@@ -240,12 +377,19 @@
     <main class="main-content">
         <!-- TOPBAR -->
         <header class="topbar">
-            <div class="flex items-center gap-4">
-                <h2 id="page-title" class="text-xl font-bold text-[var(--text-main)]">Family Dashboard</h2>
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <!-- Hamburger Button (Tablet & Mobile) -->
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Open sidebar menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <h2 id="page-title" class="text-lg sm:text-xl font-bold text-[var(--text-main)] truncate">Family Dashboard</h2>
             </div>
-            <div class="flex items-center gap-4">
-                <a href="index.html" class="text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--accent-color)] mr-4 transition-colors">
-                    <i class="fas fa-arrow-left mr-1"></i> Back to Site
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                <a href="index.html" class="text-xs sm:text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--accent-color)] mr-1 sm:mr-3 transition-colors flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg hover:bg-[var(--bg-secondary)]" title="Back to Site">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="hidden sm:inline">Back to Site</span>
                 </a>
                 <button id="theme-toggle-desktop" class="icon-btn" title="Toggle Dark Mode">
                     <i class="fas fa-moon" id="theme-icon-desktop"></i>
@@ -262,9 +406,9 @@
             <!-- DASHBOARD SECTION (Default Active) -->
             <div id="section-dashboard" class="content-section">
                 <!-- STATS GRID -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
                     <div class="stat-card">
-                        <div class="stat-icon bg-brand-light text-brand dark:bg-brand/20">
+                        <div class="stat-icon bg-brand-light text-brand dark:bg-brand/20 shrink-0">
                             <i class="fas fa-user-friends"></i>
                         </div>
                         <div>
@@ -273,7 +417,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon bg-blue-100 text-blue-600 dark:bg-blue-900/30">
+                        <div class="stat-icon bg-blue-100 text-blue-600 dark:bg-blue-900/30 shrink-0">
                             <i class="fas fa-calendar-check"></i>
                         </div>
                         <div>
@@ -282,7 +426,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon bg-purple-100 text-purple-600 dark:bg-purple-900/30">
+                        <div class="stat-icon bg-purple-100 text-purple-600 dark:bg-purple-900/30 shrink-0">
                             <i class="fas fa-clipboard-list"></i>
                         </div>
                         <div>
@@ -291,7 +435,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30">
+                        <div class="stat-icon bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 shrink-0">
                             <i class="fas fa-heartbeat"></i>
                         </div>
                         <div>
@@ -302,9 +446,9 @@
                 </div>
 
                 <!-- CHARTS & TABLES -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
                     <!-- CONTENT SECTION -->
-                    <div class="lg:col-span-2 bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                    <div class="lg:col-span-2 bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="font-bold text-[var(--text-main)] text-lg">Weekly Schedule & Goals</h3>
                         </div>
@@ -341,32 +485,32 @@
                     </div>
 
                     <!-- RECENT ACTIVITY -->
-                    <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                    <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                         <h3 class="font-bold text-[var(--text-main)] text-lg mb-6">Recent Updates</h3>
                         <div class="space-y-6">
                             <div class="flex gap-4">
-                                <div class="w-2 h-2 rounded-full bg-[var(--accent-color)] mt-2"></div>
+                                <div class="w-2 h-2 rounded-full bg-[var(--accent-color)] mt-2 shrink-0"></div>
                                 <div>
                                     <p class="text-sm font-semibold text-[var(--text-main)]">Lunch Served: Mediterranean Diet</p>
                                     <p class="text-xs text-[var(--text-muted)] mt-1">2 hours ago</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <div class="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
+                                <div class="w-2 h-2 rounded-full bg-blue-500 mt-2 shrink-0"></div>
                                 <div>
                                     <p class="text-sm font-semibold text-[var(--text-main)]">Medication Administered</p>
                                     <p class="text-xs text-[var(--text-muted)] mt-1">Today at 10:00 AM</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <div class="w-2 h-2 rounded-full bg-[var(--accent-color)] mt-2"></div>
+                                <div class="w-2 h-2 rounded-full bg-[var(--accent-color)] mt-2 shrink-0"></div>
                                 <div>
                                     <p class="text-sm font-semibold text-[var(--text-main)]">Participated in Music Therapy</p>
                                     <p class="text-xs text-[var(--text-muted)] mt-1">Yesterday</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <div class="w-2 h-2 rounded-full bg-purple-500 mt-2"></div>
+                                <div class="w-2 h-2 rounded-full bg-purple-500 mt-2 shrink-0"></div>
                                 <div>
                                     <p class="text-sm font-semibold text-[var(--text-main)]">Monthly Care Plan Renewed</p>
                                     <p class="text-xs text-[var(--text-muted)] mt-1">Oct 1, 2026</p>
@@ -377,9 +521,9 @@
                 </div>
 
                 <!-- TABLE -->
-                <div class="mt-8 bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)] overflow-x-auto">
+                <div class="mt-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)] overflow-x-auto">
                     <h3 class="font-bold text-[var(--text-main)] text-lg mb-6">Current Care Plans & Billing</h3>
-                    <table>
+                    <table class="w-full min-w-[500px]">
                         <thead>
                             <tr>
                                 <th>Relative Name</th>
@@ -410,19 +554,21 @@
 
             <!-- MY RELATIVES SECTION -->
             <div id="section-relatives" class="content-section hidden">
-                <div class="flex justify-between items-center mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                     <h3 class="font-bold text-[var(--text-main)] text-xl">My Relatives</h3>
-                    <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors"><i class="fas fa-plus mr-2"></i>Add Profile</button>
+                    <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors shrink-0 w-full sm:w-auto text-center"><i class="fas fa-plus mr-2"></i>Add Profile</button>
                 </div>
-                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
-                    <div class="flex items-start gap-6">
-                        <img src="images/eldercare (9).jpg" alt="Martha Jenkins" class="w-24 h-24 rounded-2xl object-cover border-4 border-[var(--bg-secondary)]">
-                        <div>
+                <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left rtl:sm:text-right gap-4 sm:gap-6">
+                        <img src="images/eldercare (9).jpg" alt="Martha Jenkins" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-4 border-[var(--bg-secondary)] shrink-0">
+                        <div class="flex-1">
                             <h4 class="text-2xl font-bold text-[var(--text-main)]">Martha Jenkins</h4>
                             <p class="text-sm text-[var(--text-muted)] mb-3">Enrolled in Standard Care Plan</p>
-                            <span class="status-badge bg-brand-light text-brand mb-2 inline-block">Diet: Low Sodium</span>
-                            <span class="status-badge bg-blue-100 text-blue-600 mb-2 inline-block ml-2">Mobility: Assisted</span>
-                            <div class="mt-2 flex gap-3">
+                            <div class="flex flex-wrap justify-center sm:justify-start rtl:sm:justify-start gap-2 mb-3">
+                                <span class="status-badge bg-brand-light text-brand inline-block">Diet: Low Sodium</span>
+                                <span class="status-badge bg-blue-100 text-blue-600 inline-block">Mobility: Assisted</span>
+                            </div>
+                            <div class="mt-2 flex justify-center sm:justify-start rtl:sm:justify-start gap-4">
                                 <button class="text-[var(--accent-color)] text-sm font-bold hover:underline">Edit Profile</button>
                                 <button class="text-[var(--accent-color)] text-sm font-bold hover:underline">View Daily Logs</button>
                             </div>
@@ -436,11 +582,11 @@
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-bold text-[var(--text-main)] text-xl">Care Schedule</h3>
                 </div>
-                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                     <p class="text-[var(--text-muted)] mb-6">View Martha's daily and weekly activities.</p>
                     <div class="space-y-4">
-                        <div class="flex gap-4 items-center p-4 border border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)] border-l-4 border-l-[var(--accent-color)]">
-                            <div class="text-center min-w-[60px]">
+                        <div class="flex gap-3 sm:gap-4 items-center p-4 border border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)] border-l-4 border-l-[var(--accent-color)]">
+                            <div class="text-center min-w-[55px] sm:min-w-[60px] shrink-0">
                                 <p class="text-xs font-bold text-[var(--text-muted)] uppercase">Today</p>
                                 <h5 class="text-lg font-black text-[var(--text-main)]">2:00 PM</h5>
                             </div>
@@ -449,8 +595,8 @@
                                 <p class="text-sm text-[var(--text-muted)]">Main recreation hall.</p>
                             </div>
                         </div>
-                        <div class="flex gap-4 items-center p-4 border border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)]">
-                            <div class="text-center min-w-[60px]">
+                        <div class="flex gap-3 sm:gap-4 items-center p-4 border border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)]">
+                            <div class="text-center min-w-[55px] sm:min-w-[60px] shrink-0">
                                 <p class="text-xs font-bold text-[var(--text-muted)] uppercase">Tomorrow</p>
                                 <h5 class="text-lg font-black text-[var(--text-main)]">9:00 AM</h5>
                             </div>
@@ -468,12 +614,12 @@
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-bold text-[var(--text-main)] text-xl">Health Reports</h3>
                 </div>
-                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
-                    <div class="p-8 text-center border-2 border-dashed border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)]">
+                <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
+                    <div class="p-6 sm:p-8 text-center border-2 border-dashed border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)]">
                         <i class="fas fa-file-medical-alt text-4xl text-[var(--text-muted)] mb-3"></i>
                         <h4 class="font-bold text-[var(--text-main)] mb-1">Monthly Vitals Report Available</h4>
                         <p class="text-sm text-[var(--text-muted)] mb-4">The October health check summary for Martha is ready to view.</p>
-                        <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-6 rounded-lg shadow transition-colors">Download PDF</button>
+                        <button class="w-full sm:w-auto bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-6 rounded-lg shadow transition-colors">Download PDF</button>
                     </div>
                 </div>
             </div>
@@ -483,35 +629,37 @@
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-bold text-[var(--text-main)] text-xl">Billing & Invoices</h3>
                 </div>
-                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                     <h4 class="font-bold text-[var(--text-main)] mb-4">Payment History</h4>
-                    <table class="w-full">
-                        <thead>
-                            <tr>
-                                <th>Invoice Date</th>
-                                <th>Description</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Oct 1, 2026</td>
-                                <td>Standard Care Plan (October)</td>
-                                <td class="font-bold">$850.00</td>
-                                <td><span class="status-badge status-active bg-emerald-100 text-emerald-600">Paid</span></td>
-                                <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">Receipt</button></td>
-                            </tr>
-                            <tr>
-                                <td>Sep 1, 2026</td>
-                                <td>Standard Care Plan (September)</td>
-                                <td class="font-bold">$850.00</td>
-                                <td><span class="status-badge status-active bg-emerald-100 text-emerald-600">Paid</span></td>
-                                <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">Receipt</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="overflow-x-auto">
+                        <table class="w-full min-w-[550px]">
+                            <thead>
+                                <tr>
+                                    <th>Invoice Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Oct 1, 2026</td>
+                                    <td>Standard Care Plan (October)</td>
+                                    <td class="font-bold">$850.00</td>
+                                    <td><span class="status-badge status-active bg-emerald-100 text-emerald-600">Paid</span></td>
+                                    <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">Receipt</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Sep 1, 2026</td>
+                                    <td>Standard Care Plan (September)</td>
+                                    <td class="font-bold">$850.00</td>
+                                    <td><span class="status-badge status-active bg-emerald-100 text-emerald-600">Paid</span></td>
+                                    <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">Receipt</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -520,7 +668,7 @@
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-bold text-[var(--text-main)] text-xl">Account Settings</h3>
                 </div>
-                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                     <div class="max-w-xl space-y-6">
                         <div>
                             <h4 class="font-bold text-[var(--text-main)] mb-2 text-sm">Update Email Address</h4>
@@ -538,7 +686,7 @@
                             </label>
                         </div>
                         <div class="pt-4 border-t border-[var(--border-color)]">
-                            <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2.5 px-6 rounded-lg shadow transition-colors text-sm">Save Changes</button>
+                            <button class="w-full sm:w-auto bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2.5 px-6 rounded-lg shadow transition-colors text-sm">Save Changes</button>
                         </div>
                     </div>
                 </div>
@@ -549,6 +697,35 @@
 
     <!-- JAVASCRIPT -->
     <script>
+        // Sidebar Toggle for Mobile & Tablet
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+
+        function openSidebar() {
+            if (sidebar) sidebar.classList.add('active');
+            if (sidebarOverlay) sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            if (sidebar) sidebar.classList.remove('active');
+            if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (hamburgerBtn) hamburgerBtn.addEventListener('click', openSidebar);
+        if (sidebarCloseBtn) sidebarCloseBtn.addEventListener('click', closeSidebar);
+        if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Close sidebar on pressing Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar && sidebar.classList.contains('active')) {
+                closeSidebar();
+            }
+        });
+
         // Tab switching logic
         const sidebarLinks = document.querySelectorAll('.sidebar-link[data-target]');
         const contentSections = document.querySelectorAll('.content-section');
@@ -578,7 +755,19 @@
                         sec.classList.add('hidden');
                     }
                 });
+
+                // Auto close sidebar on mobile & tablet upon navigation
+                if (window.innerWidth <= 1024) {
+                    closeSidebar();
+                }
             });
+        });
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024) {
+                closeSidebar();
+            }
         });
 
         // Theme logic

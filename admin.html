@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -96,6 +96,73 @@
             border-color: var(--accent-color);
         }
 
+        /* HAMBURGER BUTTON */
+        .hamburger-btn {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px;
+            transition: all 0.2s ease;
+            color: var(--text-main);
+            flex-shrink: 0;
+        }
+        .hamburger-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .hamburger-btn span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background-color: currentColor;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* SIDEBAR OVERLAY */
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* SIDEBAR CLOSE BUTTON */
+        .sidebar-close-btn {
+            display: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .sidebar-close-btn:hover {
+            color: #ef4444;
+            border-color: #fca5a5;
+        }
+
         /* DASHBOARD LAYOUT */
         .sidebar {
             width: 280px;
@@ -104,6 +171,7 @@
             display: flex;
             flex-direction: column;
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
         .main-content {
             flex: 1;
@@ -111,6 +179,7 @@
             flex-direction: column;
             overflow: hidden;
             background-color: var(--bg-color);
+            min-width: 0;
         }
         .topbar {
             height: 70px;
@@ -120,11 +189,72 @@
             justify-content: space-between;
             padding: 0 24px;
             background-color: var(--sidebar-bg);
+            transition: background-color 0.3s;
         }
         .content-area {
             flex: 1;
             overflow-y: auto;
             padding: 32px;
+        }
+
+        /* TABLET & MOBILE RESPONSIVE (Up to 1024px) */
+        @media (max-width: 1024px) {
+            .hamburger-btn {
+                display: flex;
+            }
+            .sidebar-close-btn {
+                display: flex;
+            }
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                width: 280px;
+                max-width: 85vw;
+                height: 100vh;
+                height: 100dvh;
+                z-index: 1050;
+                transform: translateX(-100%);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            [dir="rtl"] .sidebar {
+                left: auto;
+                right: 0;
+                border-right: none;
+                border-left: 1px solid var(--border-color);
+                transform: translateX(100%);
+            }
+            [dir="rtl"] .sidebar.active {
+                transform: translateX(0);
+            }
+            .topbar {
+                height: 64px;
+                padding: 0 16px;
+            }
+            .content-area {
+                padding: 16px;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .sidebar-overlay {
+                display: none !important;
+            }
+            .sidebar-close-btn {
+                display: none !important;
+            }
+            .hamburger-btn {
+                display: none !important;
+            }
+            [dir="rtl"] .sidebar {
+                border-right: none;
+                border-left: 1px solid var(--border-color);
+            }
         }
 
         /* SIDEBAR LINKS */
@@ -199,10 +329,13 @@
 
 <body>
 
+    <!-- SIDEBAR OVERLAY (Mobile & Tablet) -->
+    <div id="sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
         <!-- LOGO HEADER -->
-        <div class="h-[70px] flex items-center px-6 border-b border-[var(--border-color)] shrink-0">
+        <div class="h-[70px] flex items-center justify-between px-6 border-b border-[var(--border-color)] shrink-0">
             <!-- 100% IDENTICAL LOGO AS REQUESTED -->
             <a href="index.html" class="flex items-center gap-3 no-underline group w-max">
                 <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center transition-transform group-hover:scale-105 shadow-md">
@@ -212,6 +345,10 @@
                     Elder<span class="text-brand">Care</span>
                 </span>
             </a>
+            <!-- Mobile/Tablet Close Button -->
+            <button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="Close sidebar menu">
+                <i class="fas fa-times text-base"></i>
+            </button>
         </div>
 
         <div class="flex-1 py-6 space-y-1 overflow-y-auto" id="sidebar-menu">
@@ -243,12 +380,19 @@
     <main class="main-content">
         <!-- TOPBAR -->
         <header class="topbar">
-            <div class="flex items-center gap-4">
-                <h2 id="page-title" class="text-xl font-bold text-[var(--text-main)]">Dashboard Overview</h2>
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <!-- Hamburger Button (Tablet & Mobile) -->
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Open sidebar menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <h2 id="page-title" class="text-lg sm:text-xl font-bold text-[var(--text-main)] truncate">Dashboard Overview</h2>
             </div>
-            <div class="flex items-center gap-4">
-                <a href="index.html" class="text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--accent-color)] mr-4 transition-colors">
-                    <i class="fas fa-arrow-left mr-1"></i> Back to Site
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                <a href="index.html" class="text-xs sm:text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--accent-color)] mr-1 sm:mr-3 transition-colors flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg hover:bg-[var(--bg-secondary)]" title="Back to Site">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="hidden sm:inline">Back to Site</span>
                 </a>
                 <button id="theme-toggle-desktop" class="icon-btn" title="Toggle Dark Mode">
                     <i class="fas fa-moon" id="theme-icon-desktop"></i>
@@ -265,9 +409,9 @@
             <!-- DASHBOARD SECTION (Default Active) -->
             <div id="section-dashboard" class="content-section">
                 <!-- STATS GRID -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
                     <div class="stat-card">
-                        <div class="stat-icon bg-brand-light text-brand dark:bg-brand/20">
+                        <div class="stat-icon bg-brand-light text-brand dark:bg-brand/20 shrink-0">
                             <i class="fas fa-users"></i>
                         </div>
                         <div>
@@ -276,7 +420,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon bg-blue-100 text-blue-600 dark:bg-blue-900/30">
+                        <div class="stat-icon bg-blue-100 text-blue-600 dark:bg-blue-900/30 shrink-0">
                             <i class="fas fa-dollar-sign"></i>
                         </div>
                         <div>
@@ -285,7 +429,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon bg-purple-100 text-purple-600 dark:bg-purple-900/30">
+                        <div class="stat-icon bg-purple-100 text-purple-600 dark:bg-purple-900/30 shrink-0">
                             <i class="fas fa-clipboard-check"></i>
                         </div>
                         <div>
@@ -294,7 +438,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon bg-orange-100 text-orange-600 dark:bg-orange-900/30">
+                        <div class="stat-icon bg-orange-100 text-orange-600 dark:bg-orange-900/30 shrink-0">
                             <i class="fas fa-user-clock"></i>
                         </div>
                         <div>
@@ -305,29 +449,29 @@
                 </div>
 
                 <!-- CHARTS & TABLES -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
                     <!-- CONTENT SECTION -->
-                    <div class="lg:col-span-2 bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                    <div class="lg:col-span-2 bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="font-bold text-[var(--text-main)] text-lg">System Alerts & Actions</h3>
                         </div>
                         <div class="space-y-4">
-                            <div class="p-5 border border-red-200 dark:border-red-900/50 rounded-xl bg-red-50 dark:bg-red-900/10 flex items-start gap-4">
-                                <i class="fas fa-exclamation-triangle text-red-500 text-xl mt-1"></i>
+                            <div class="p-4 sm:p-5 border border-red-200 dark:border-red-900/50 rounded-xl bg-red-50 dark:bg-red-900/10 flex items-start gap-4">
+                                <i class="fas fa-exclamation-triangle text-red-500 text-xl mt-1 shrink-0"></i>
                                 <div>
                                     <h4 class="font-bold text-red-700 dark:text-red-400">Staffing Alert: Memory Care Unit</h4>
                                     <p class="text-sm text-red-600 dark:text-red-300 mt-1">Two caregivers have called in sick for the afternoon shift. Ratio currently below compliance.</p>
                                     <button class="mt-3 text-xs font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 px-3 py-1.5 rounded hover:bg-red-200 transition-colors">Request Cover</button>
                                 </div>
                             </div>
-                            <div class="p-5 border border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)] flex items-start gap-4">
-                                <i class="fas fa-notes-medical text-[var(--text-muted)] text-xl mt-1"></i>
+                            <div class="p-4 sm:p-5 border border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)] flex items-start gap-4">
+                                <i class="fas fa-notes-medical text-[var(--text-muted)] text-xl mt-1 shrink-0"></i>
                                 <div>
                                     <h4 class="font-bold text-[var(--text-main)]">Upcoming Doctor Visit</h4>
                                     <p class="text-sm text-[var(--text-muted)] mt-1">Dr. Cole is scheduled for routine consultations on Thursday at 9:00 AM. 15 seniors are queued.</p>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 gap-4 mt-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-4">
                                 <button class="flex items-center justify-center gap-2 p-3 bg-[var(--accent-color)] text-white rounded-lg font-bold text-sm hover:bg-[var(--accent-dark)] shadow-sm shadow-brand/30 transition-all hover:-translate-y-0.5">
                                     <i class="fas fa-bullhorn"></i> Send Family Announcement
                                 </button>
@@ -339,11 +483,11 @@
                     </div>
 
                     <!-- RECENT ACTIVITY -->
-                    <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                    <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                         <h3 class="font-bold text-[var(--text-main)] text-lg mb-6">Facility Activity</h3>
                         <div class="space-y-6">
                             <div class="flex gap-4">
-                                <div class="w-2 h-2 rounded-full bg-[var(--accent-color)] mt-2"></div>
+                                <div class="w-2 h-2 rounded-full bg-[var(--accent-color)] mt-2 shrink-0"></div>
                                 <div>
                                     <p class="text-sm font-semibold text-[var(--text-main)]">New senior registered</p>
                                     <p class="text-xs text-[var(--text-muted)] mt-1">Martha Stevens (Drop-In Plan)</p>
@@ -351,7 +495,7 @@
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <div class="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
+                                <div class="w-2 h-2 rounded-full bg-blue-500 mt-2 shrink-0"></div>
                                 <div>
                                     <p class="text-sm font-semibold text-[var(--text-main)]">Care plan upgraded</p>
                                     <p class="text-xs text-[var(--text-muted)] mt-1">Robert Garcia to Specialized Care</p>
@@ -359,7 +503,7 @@
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <div class="w-2 h-2 rounded-full bg-orange-500 mt-2"></div>
+                                <div class="w-2 h-2 rounded-full bg-orange-500 mt-2 shrink-0"></div>
                                 <div>
                                     <p class="text-sm font-semibold text-[var(--text-main)]">Medical profile updated</p>
                                     <p class="text-xs text-[var(--text-muted)] mt-1">Added dietary restriction for Joan W.</p>
@@ -367,7 +511,7 @@
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <div class="w-2 h-2 rounded-full bg-purple-500 mt-2"></div>
+                                <div class="w-2 h-2 rounded-full bg-purple-500 mt-2 shrink-0"></div>
                                 <div>
                                     <p class="text-sm font-semibold text-[var(--text-main)]">Transport Shuttle Arrived</p>
                                     <p class="text-xs text-[var(--text-muted)] mt-1">Morning pickup route completed safely</p>
@@ -379,12 +523,12 @@
                 </div>
 
                 <!-- TABLE -->
-                <div class="mt-8 bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)] overflow-x-auto">
+                <div class="mt-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)] overflow-x-auto">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="font-bold text-[var(--text-main)] text-lg">Recent Enrollments</h3>
                         <button class="text-[var(--accent-color)] text-sm font-semibold hover:underline">View All</button>
                     </div>
-                    <table>
+                    <table class="w-full min-w-[550px]">
                         <thead>
                             <tr>
                                 <th>Member</th>
@@ -442,53 +586,55 @@
 
             <!-- MANAGE SENIORS SECTION -->
             <div id="section-seniors" class="content-section hidden">
-                <div class="flex justify-between items-center mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                     <h3 class="font-bold text-[var(--text-main)] text-xl">Manage Seniors</h3>
-                    <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors"><i class="fas fa-plus mr-2"></i>Add Senior</button>
+                    <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors shrink-0 w-full sm:w-auto text-center"><i class="fas fa-plus mr-2"></i>Add Senior</button>
                 </div>
-                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                     <div class="flex items-center gap-3 mb-6">
-                        <input type="text" placeholder="Search seniors..." class="w-full max-w-md bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)]">
-                        <button class="bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:bg-[var(--border-color)] text-[var(--text-main)] font-bold py-2 px-4 rounded-lg transition-colors"><i class="fas fa-search"></i></button>
+                        <input type="text" placeholder="Search seniors..." class="w-full sm:max-w-md bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)]">
+                        <button class="bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:bg-[var(--border-color)] text-[var(--text-main)] font-bold py-2 px-4 rounded-lg transition-colors shrink-0"><i class="fas fa-search"></i></button>
                     </div>
-                    <table class="w-full">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Age</th>
-                                <th>Primary Contact</th>
-                                <th>Care Level</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                                <td class="font-semibold text-[var(--text-main)]">John Doe</td>
-                                <td>82</td>
-                                <td>Jane Doe (Daughter)</td>
-                                <td><span class="status-badge bg-blue-100 text-blue-600">Standard</span></td>
-                                <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">View Profile</button></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                                <td class="font-semibold text-[var(--text-main)]">Mary Smith</td>
-                                <td>78</td>
-                                <td>Robert Smith (Son)</td>
-                                <td><span class="status-badge bg-purple-100 text-purple-600">Memory Care</span></td>
-                                <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">View Profile</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="overflow-x-auto">
+                        <table class="w-full min-w-[580px]">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Primary Contact</th>
+                                    <th>Care Level</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                    <td class="font-semibold text-[var(--text-main)]">John Doe</td>
+                                    <td>82</td>
+                                    <td>Jane Doe (Daughter)</td>
+                                    <td><span class="status-badge bg-blue-100 text-blue-600">Standard</span></td>
+                                    <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">View Profile</button></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                    <td class="font-semibold text-[var(--text-main)]">Mary Smith</td>
+                                    <td>78</td>
+                                    <td>Robert Smith (Son)</td>
+                                    <td><span class="status-badge bg-purple-100 text-purple-600">Memory Care</span></td>
+                                    <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">View Profile</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
             <!-- CARE PLANS SECTION -->
             <div id="section-careplans" class="content-section hidden">
-                <div class="flex justify-between items-center mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                     <h3 class="font-bold text-[var(--text-main)] text-xl">Care Plans</h3>
-                    <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors"><i class="fas fa-plus mr-2"></i>Create Plan</button>
+                    <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors shrink-0 w-full sm:w-auto text-center"><i class="fas fa-plus mr-2"></i>Create Plan</button>
                 </div>
-                <div class="grid gap-6 grid-cols-1 md:grid-cols-3">
-                    <div class="p-6 border border-[var(--border-color)] rounded-[20px] bg-[var(--bg-card)]">
+                <div class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                    <div class="p-5 sm:p-6 border border-[var(--border-color)] rounded-2xl sm:rounded-[20px] bg-[var(--bg-card)]">
                         <h4 class="font-bold text-xl text-[var(--text-main)]">Basic Support</h4>
                         <p class="text-sm text-[var(--text-muted)] mb-4 mt-1">Drop-In / Half Day</p>
                         <span class="status-badge status-active bg-emerald-100 text-emerald-600 mb-4 inline-block">Active - 45 Members</span>
@@ -497,7 +643,7 @@
                             <button class="flex-1 bg-[var(--bg-secondary)] hover:bg-[var(--border-color)] text-[var(--text-main)] text-sm font-bold py-2 rounded-lg transition-colors">View Members</button>
                         </div>
                     </div>
-                    <div class="p-6 border border-[var(--border-color)] rounded-[20px] bg-[var(--bg-card)]">
+                    <div class="p-5 sm:p-6 border border-[var(--border-color)] rounded-2xl sm:rounded-[20px] bg-[var(--bg-card)]">
                         <h4 class="font-bold text-xl text-[var(--text-main)]">Standard Care</h4>
                         <p class="text-sm text-[var(--text-muted)] mb-4 mt-1">Full Monthly Plan</p>
                         <span class="status-badge status-active bg-emerald-100 text-emerald-600 mb-4 inline-block">Active - 120 Members</span>
@@ -506,7 +652,7 @@
                             <button class="flex-1 bg-[var(--bg-secondary)] hover:bg-[var(--border-color)] text-[var(--text-main)] text-sm font-bold py-2 rounded-lg transition-colors">View Members</button>
                         </div>
                     </div>
-                    <div class="p-6 border border-[var(--border-color)] rounded-[20px] bg-[var(--bg-card)]">
+                    <div class="p-5 sm:p-6 border border-[var(--border-color)] rounded-2xl sm:rounded-[20px] bg-[var(--bg-card)]">
                         <h4 class="font-bold text-xl text-[var(--text-main)]">Memory Care</h4>
                         <p class="text-sm text-[var(--text-muted)] mb-4 mt-1">Specialized Care Wing</p>
                         <span class="status-badge status-active bg-emerald-100 text-emerald-600 mb-4 inline-block">Active - 89 Members</span>
@@ -523,12 +669,12 @@
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-bold text-[var(--text-main)] text-xl">Medical Records</h3>
                 </div>
-                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                     <div class="flex items-center gap-3 mb-6">
-                        <input type="text" placeholder="Search by Senior Name or ID..." class="w-full max-w-md bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)]">
-                        <button class="bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:bg-[var(--border-color)] text-[var(--text-main)] font-bold py-2 px-4 rounded-lg transition-colors"><i class="fas fa-search"></i></button>
+                        <input type="text" placeholder="Search by Senior Name or ID..." class="w-full sm:max-w-md bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)]">
+                        <button class="bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:bg-[var(--border-color)] text-[var(--text-main)] font-bold py-2 px-4 rounded-lg transition-colors shrink-0"><i class="fas fa-search"></i></button>
                     </div>
-                    <div class="p-8 text-center border-2 border-dashed border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)]">
+                    <div class="p-6 sm:p-8 text-center border-2 border-dashed border-[var(--border-color)] rounded-xl bg-[var(--bg-secondary)]">
                         <i class="fas fa-folder-open text-4xl text-[var(--text-muted)] mb-3"></i>
                         <h4 class="font-bold text-[var(--text-main)] mb-1">Search to view records</h4>
                         <p class="text-sm text-[var(--text-muted)]">Secure vault for medical history, prescriptions, and dietary requirements.</p>
@@ -541,28 +687,28 @@
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-bold text-[var(--text-main)] text-xl">Support Tickets</h3>
                 </div>
-                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                     <p class="text-[var(--text-muted)] mb-6 text-sm">Manage family inquiries and staff requests.</p>
                     <div class="space-y-3">
-                        <div class="p-4 border border-[var(--border-color)] rounded-xl flex justify-between items-center bg-[var(--bg-secondary)] hover:border-[var(--accent-color)] transition-colors cursor-pointer">
+                        <div class="p-4 border border-[var(--border-color)] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[var(--bg-secondary)] hover:border-[var(--accent-color)] transition-colors cursor-pointer">
                             <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600"><i class="fas fa-file-invoice-dollar"></i></div>
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0"><i class="fas fa-file-invoice-dollar"></i></div>
                                 <div>
                                     <h5 class="font-bold text-sm text-[var(--text-main)]">Billing Question for October</h5>
                                     <p class="text-xs text-[var(--text-muted)] mt-1">From: John Jenkins (Family) • Created 2 hours ago</p>
                                 </div>
                             </div>
-                            <span class="status-badge status-pending">Open</span>
+                            <span class="status-badge status-pending self-start sm:self-auto shrink-0">Open</span>
                         </div>
-                        <div class="p-4 border border-[var(--border-color)] rounded-xl flex justify-between items-center bg-[var(--bg-secondary)] hover:border-[var(--accent-color)] transition-colors cursor-pointer">
+                        <div class="p-4 border border-[var(--border-color)] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[var(--bg-secondary)] hover:border-[var(--accent-color)] transition-colors cursor-pointer">
                             <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600"><i class="fas fa-apple-alt"></i></div>
+                                <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0"><i class="fas fa-apple-alt"></i></div>
                                 <div>
                                     <h5 class="font-bold text-sm text-[var(--text-main)]">Change dietary plan</h5>
                                     <p class="text-xs text-[var(--text-muted)] mt-1">From: Medical Staff • Closed Yesterday</p>
                                 </div>
                             </div>
-                            <span class="status-badge status-active bg-emerald-100 text-emerald-600">Resolved</span>
+                            <span class="status-badge status-active bg-emerald-100 text-emerald-600 self-start sm:self-auto shrink-0">Resolved</span>
                         </div>
                     </div>
                 </div>
@@ -573,7 +719,7 @@
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-bold text-[var(--text-main)] text-xl">System Settings</h3>
                 </div>
-                <div class="bg-[var(--bg-card)] rounded-[20px] p-6 border border-[var(--border-color)]">
+                <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
                     <div class="max-w-xl space-y-6">
                         <div>
                             <h4 class="font-bold text-[var(--text-main)] mb-2 text-sm">Facility Name</h4>
@@ -591,7 +737,7 @@
                             </label>
                         </div>
                         <div class="pt-4 border-t border-[var(--border-color)]">
-                            <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2.5 px-6 rounded-lg shadow transition-colors text-sm">Save Settings</button>
+                            <button class="w-full sm:w-auto bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2.5 px-6 rounded-lg shadow transition-colors text-sm">Save Settings</button>
                         </div>
                     </div>
                 </div>
@@ -602,6 +748,35 @@
 
     <!-- JAVASCRIPT -->
     <script>
+        // Sidebar Toggle for Mobile & Tablet
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+
+        function openSidebar() {
+            if (sidebar) sidebar.classList.add('active');
+            if (sidebarOverlay) sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            if (sidebar) sidebar.classList.remove('active');
+            if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (hamburgerBtn) hamburgerBtn.addEventListener('click', openSidebar);
+        if (sidebarCloseBtn) sidebarCloseBtn.addEventListener('click', closeSidebar);
+        if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Close sidebar on pressing Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar && sidebar.classList.contains('active')) {
+                closeSidebar();
+            }
+        });
+
         // Tab switching logic
         const sidebarLinks = document.querySelectorAll('.sidebar-link[data-target]');
         const contentSections = document.querySelectorAll('.content-section');
@@ -625,14 +800,26 @@
                 contentSections.forEach(sec => {
                     if(sec.id === targetId) {
                         sec.classList.remove('hidden');
-                        // Optional simple fade in
+                        // Simple fade in
                         sec.style.opacity = 0;
                         setTimeout(() => sec.style.opacity = 1, 50);
                     } else {
                         sec.classList.add('hidden');
                     }
                 });
+
+                // Auto close sidebar on mobile & tablet upon navigation
+                if (window.innerWidth <= 1024) {
+                    closeSidebar();
+                }
             });
+        });
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024) {
+                closeSidebar();
+            }
         });
 
         // Theme logic
