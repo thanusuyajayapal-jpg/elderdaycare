@@ -147,7 +147,7 @@
     </ul>
   </div>
 
-  <!-- ================= HERO BANNER ================= -->
+  <!-- ======<!-- =========== HERO BANNER ================= -->
   <section class="relative min-h-[85vh] flex items-center justify-center text-center overflow-hidden isolate bg-gray-900">
     <div class="absolute inset-0 -z-20">
       <div class="slider-image absolute inset-0 bg-cover bg-center opacity-100 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (3).jpg');"></div>
@@ -162,13 +162,19 @@
         <span class="font-normal italic text-brand-light text-4xl md:text-6xl mt-2 block">For the ones you love most</span>
       </h1>
       <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">Engaging daily activities, professional health monitoring, and a vibrant social environment for seniors.</p>
-      <a href="contact.html" class="inline-block bg-brand hover:bg-brand-dark text-white font-semibold py-4 px-10 rounded-full transition-transform hover:scale-105 shadow-lg">Schedule a Tour Today</a>
+      
+      <!-- CTA Buttons Container -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="contact.html" class="w-full sm:w-auto inline-block bg-brand hover:bg-brand-dark text-white font-semibold py-4 px-10 rounded-full transition-transform hover:scale-105 shadow-lg text-center">Schedule a Tour Today</a>
+        <a href="services.html" class="w-full sm:w-auto inline-block border-2 border-white/80 hover:bg-white/10 text-white font-semibold py-4 px-8 rounded-full transition-all text-center">Explore Services</a>
+      </div>
     </div>
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
       <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all scale-125 bg-brand border-2 border-white" aria-label="Slide 1"></button>
       <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" aria-label="Slide 2"></button>
       <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" aria-label="Slide 3"></button>
     </div>
+  </section>
   </section>
    <!-- SECTION 5 (Design: Stats/CTA Banner): Impact & Call to Action -->
     <section class="py-16 bg-brand dark:bg-brand-dark text-white relative overflow-hidden">
@@ -281,8 +287,7 @@
         </div>
       </div>
     </section>
-
-    <!-- SECTION 3 (Image-Based 3): Meet Our Care Team Profiles -->
+<!-- SECTION 3 (Image-Based 3): Meet Our Care Team Profiles -->
     <section class="py-20 bg-white dark:bg-gray-800 transition-colors">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
@@ -292,53 +297,53 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <!-- Profile Card 1 -->
-          <div class="bg-gray-50 dark:bg-gray-700 rounded-3xl p-6 text-center shadow-sm hover:shadow-xl transition-shadow group">
+          <div class="bg-gray-50 dark:bg-gray-700 rounded-3xl p-6 text-center shadow-sm hover:shadow-xl transition-shadow group flex flex-col">
             <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-white dark:border-gray-600 shadow-md">
               <img src="images/about3.jpg" alt="Nurse" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
             </div>
             <h3 class="text-xl font-bold text-gray-900 dark:text-white">Sarah Jenkins</h3>
             <p class="text-brand font-medium text-sm mb-3">Head Registered Nurse</p>
             <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">15+ years of geriatric care experience, specializing in mobility.</p>
-            <div class="flex justify-center gap-3 text-gray-400">
+            <div class="flex justify-center gap-3 text-gray-400 mt-auto">
               <a href="#" class="hover:text-brand transition-colors"><i class="fa-solid fa-envelope"></i></a>
               <a href="#" class="hover:text-brand transition-colors"><i class="fa-brands fa-linkedin"></i></a>
             </div>
           </div>
           <!-- Profile Card 2 -->
-          <div class="bg-gray-50 dark:bg-gray-700 rounded-3xl p-6 text-center shadow-sm hover:shadow-xl transition-shadow group">
+          <div class="bg-gray-50 dark:bg-gray-700 rounded-3xl p-6 text-center shadow-sm hover:shadow-xl transition-shadow group flex flex-col">
             <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-white dark:border-gray-600 shadow-md">
               <img src="images/about4.jpg" alt="Doctor" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
             </div>
             <h3 class="text-xl font-bold text-gray-900 dark:text-white">Dr. Marcus Cole</h3>
             <p class="text-brand font-medium text-sm mb-3">Geriatric Specialist</p>
             <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Ensuring overall health monitoring and immediate medical assistance.</p>
-            <div class="flex justify-center gap-3 text-gray-400">
+            <div class="flex justify-center gap-3 text-gray-400 mt-auto">
               <a href="#" class="hover:text-brand transition-colors"><i class="fa-solid fa-envelope"></i></a>
               <a href="#" class="hover:text-brand transition-colors"><i class="fa-brands fa-linkedin"></i></a>
             </div>
           </div>
           <!-- Profile Card 3 -->
-          <div class="bg-gray-50 dark:bg-gray-700 rounded-3xl p-6 text-center shadow-sm hover:shadow-xl transition-shadow group">
+          <div class="bg-gray-50 dark:bg-gray-700 rounded-3xl p-6 text-center shadow-sm hover:shadow-xl transition-shadow group flex flex-col">
             <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-white dark:border-gray-600 shadow-md">
               <img src="images/about5.jpg" alt="Caregiver" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
             </div>
             <h3 class="text-xl font-bold text-gray-900 dark:text-white">Elena Rodriguez</h3>
             <p class="text-brand font-medium text-sm mb-3">Activity Coordinator</p>
             <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Brings joy daily through structured arts, crafts, and music therapy.</p>
-            <div class="flex justify-center gap-3 text-gray-400">
+            <div class="flex justify-center gap-3 text-gray-400 mt-auto">
               <a href="#" class="hover:text-brand transition-colors"><i class="fa-solid fa-envelope"></i></a>
               <a href="#" class="hover:text-brand transition-colors"><i class="fa-brands fa-linkedin"></i></a>
             </div>
           </div>
           <!-- Profile Card 4 -->
-          <div class="bg-gray-50 dark:bg-gray-700 rounded-3xl p-6 text-center shadow-sm hover:shadow-xl transition-shadow group">
+          <div class="bg-gray-50 dark:bg-gray-700 rounded-3xl p-6 text-center shadow-sm hover:shadow-xl transition-shadow group flex flex-col">
             <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-white dark:border-gray-600 shadow-md">
               <img src="images/about6.jpg" alt="Therapist" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
             </div>
             <h3 class="text-xl font-bold text-gray-900 dark:text-white">David Kim</h3>
             <p class="text-brand font-medium text-sm mb-3">Physical Therapist</p>
             <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Guiding our seniors through safe, effective physical wellness exercises.</p>
-            <div class="flex justify-center gap-3 text-gray-400">
+            <div class="flex justify-center gap-3 text-gray-400 mt-auto">
               <a href="#" class="hover:text-brand transition-colors"><i class="fa-solid fa-envelope"></i></a>
               <a href="#" class="hover:text-brand transition-colors"><i class="fa-brands fa-linkedin"></i></a>
             </div>
