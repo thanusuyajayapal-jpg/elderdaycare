@@ -46,13 +46,23 @@
     /* Mobile Dropdown Animations */
     .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
     .mobile-dropdown-content.active { max-height: 300px; }
+
+    /* Responsive typography & overflow prevention for narrow screens (360px) */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, p, span, a {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
 
   <!-- ================= HEADER & NAVBAR ================= -->
   <header class="sticky top-0 w-full bg-white dark:bg-gray-800 shadow-sm z-50 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
       
       <!-- Logo -->
       <a href="index.html" class="flex items-center gap-3 no-underline group">
@@ -89,7 +99,7 @@
       
       <!-- Desktop Actions -->
       <div class="hidden xl:flex items-center gap-4">
-        <a href="login.html" class="px-6 py-2 rounded-full text-sm font-semibold border-2 border-brand text-brand hover:bg-brand hover:text-white transition-all dark:border-brand-light dark:text-brand-light dark:hover:bg-brand-light dark:hover:text-gray-900">Login</a>
+        <a href="login.html" class="h-10 inline-flex items-center justify-center px-6 rounded-full text-sm font-semibold border-2 border-brand text-brand hover:bg-brand hover:text-white transition-all dark:border-brand-light dark:text-brand-light dark:hover:bg-brand-light dark:hover:text-gray-900">Login</a>
         <button id="darkToggleBtn" class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-brand text-gray-600 dark:text-gray-300 transition-all">🌙</button>
         <button id="rtlToggleBtn" class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-brand text-gray-600 dark:text-gray-300 text-xs font-bold transition-all">LTR</button>
       </div>
@@ -135,19 +145,19 @@
         </div>
       </li>
       <li class="pt-4">
-        <div class="flex gap-4 mb-6">
-          <a href="login.html" class="flex-1 text-center py-3 rounded-full font-semibold border-2 border-brand text-brand dark:border-brand-light dark:text-brand-light">Login</a>
-          <a href="signup.html" class="flex-1 text-center py-3 rounded-full font-semibold bg-brand text-white hover:bg-brand-dark">Sign Up</a>
+        <div class="flex gap-4 mb-4">
+          <a href="login.html" class="flex-1 h-10 flex items-center justify-center rounded-full font-semibold border-2 border-brand text-brand dark:border-brand-light dark:text-brand-light">Login</a>
+          <a href="signup.html" class="flex-1 h-10 flex items-center justify-center rounded-full font-semibold bg-brand text-white hover:bg-brand-dark">Sign Up</a>
         </div>
         <div class="flex gap-4">
-          <button id="mobileDarkToggle" class="flex-1 py-2 rounded-full border-2 border-gray-200 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300">🌙 Dark</button>
-          <button id="mobileRtlToggle" class="flex-1 py-2 rounded-full border-2 border-gray-200 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300">LTR</button>
+          <button id="mobileDarkToggle" class="flex-1 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300">🌙 Dark</button>
+          <button id="mobileRtlToggle" class="flex-1 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300">LTR</button>
         </div>
       </li>
     </ul>
   </div>
 
-  <!-- ======<!-- =========== HERO BANNER ================= -->
+  <!-- ================= HERO BANNER ================= -->
   <section class="relative min-h-[85vh] flex items-center justify-center text-center overflow-hidden isolate bg-gray-900">
     <div class="absolute inset-0 -z-20">
       <div class="slider-image absolute inset-0 bg-cover bg-center opacity-100 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (3).jpg');"></div>
@@ -155,18 +165,18 @@
       <div class="slider-image absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-1000 ease-in-out" style="background-image: url('images/eldercare (20).jpg');"></div>
     </div>
     <div class="absolute inset-0 bg-gradient-to-b from-gray-900/80 to-gray-900/90 -z-10"></div>
-    <div class="max-w-4xl mx-auto px-6 py-24 text-white z-10">
-      <div class="text-sm md:text-base font-semibold tracking-[0.2em] uppercase mb-4 text-brand-light">Welcome to Our Community</div>
-      <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
-        Compassionate Care <br>
-        <span class="font-normal italic text-brand-light text-4xl md:text-6xl mt-2 block">For the ones you love most</span>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-white z-10">
+      <div class="text-xs sm:text-sm md:text-base font-semibold tracking-wider sm:tracking-[0.2em] uppercase mb-3 sm:mb-4 text-brand-light">Welcome to Our Community</div>
+      <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 break-words">
+        Compassionate Care <br class="hidden sm:inline">
+        <span class="font-normal italic text-brand-light text-xl sm:text-3xl md:text-5xl lg:text-6xl mt-2 block">For the ones you love most</span>
       </h1>
-      <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">Engaging daily activities, professional health monitoring, and a vibrant social environment for seniors.</p>
+      <p class="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">Engaging daily activities, professional health monitoring, and a vibrant social environment for seniors.</p>
       
       <!-- CTA Buttons Container -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="contact.html" class="w-full sm:w-auto inline-block bg-brand hover:bg-brand-dark text-white font-semibold py-4 px-10 rounded-full transition-transform hover:scale-105 shadow-lg text-center">Schedule a Tour Today</a>
-        <a href="services.html" class="w-full sm:w-auto inline-block border-2 border-white/80 hover:bg-white/10 text-white font-semibold py-4 px-8 rounded-full transition-all text-center">Explore Services</a>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+        <a href="contact.html" class="w-full sm:w-auto inline-block bg-brand hover:bg-brand-dark text-white font-semibold py-3.5 px-6 sm:py-4 sm:px-10 rounded-full transition-transform hover:scale-105 shadow-lg text-center text-sm sm:text-base">Schedule a Tour Today</a>
+        <a href="service.html" class="w-full sm:w-auto inline-block border-2 border-white/80 hover:bg-white/10 text-white font-semibold py-3.5 px-6 sm:py-4 sm:px-8 rounded-full transition-all text-center text-sm sm:text-base">Explore Services</a>
       </div>
     </div>
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
@@ -175,43 +185,44 @@
       <button class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all" aria-label="Slide 3"></button>
     </div>
   </section>
-  </section>
+
    <!-- SECTION 5 (Design: Stats/CTA Banner): Impact & Call to Action -->
-    <section class="py-16 bg-brand dark:bg-brand-dark text-white relative overflow-hidden">
+    <section class="py-12 sm:py-16 bg-brand dark:bg-brand-dark text-white relative overflow-hidden">
       <!-- Background Graphic Pattern -->
       <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
       
-      <div class="max-w-7xl mx-auto px-6 relative z-10">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-16 divide-x divide-white/20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center mb-6 sm:mb-16 md:divide-x divide-white/20">
           <div>
-            <div class="text-4xl md:text-5xl font-bold mb-2">15+</div>
-            <div class="text-brand-light font-medium">Years Experience</div>
+            <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">15+</div>
+            <div class="text-xs sm:text-sm md:text-base text-brand-light font-medium">Years Experience</div>
           </div>
           <div>
-            <div class="text-4xl md:text-5xl font-bold mb-2">250</div>
-            <div class="text-brand-light font-medium">Happy Seniors</div>
+            <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">250</div>
+            <div class="text-xs sm:text-sm md:text-base text-brand-light font-medium">Happy Seniors</div>
           </div>
           <div>
-            <div class="text-4xl md:text-5xl font-bold mb-2">24/7</div>
-            <div class="text-brand-light font-medium">Medical Support</div>
+            <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">24/7</div>
+            <div class="text-xs sm:text-sm md:text-base text-brand-light font-medium">Medical Support</div>
           </div>
           <div>
-            <div class="text-4xl md:text-5xl font-bold mb-2">50+</div>
-            <div class="text-brand-light font-medium">Weekly Activities</div>
+            <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">50+</div>
+            <div class="text-xs sm:text-sm md:text-base text-brand-light font-medium">Weekly Activities</div>
           </div>
         </div>
+      </div>
     </section>
 
   <!-- ================= MAIN CONTENT SECTIONS ================= -->
   <main>
     
     <!-- SECTION 1 (Image-Based 1): Our Facilities Image Gallery -->
-    <section class="py-20 bg-white dark:bg-gray-800 transition-colors">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-          <span class="text-brand font-semibold tracking-wider uppercase text-sm mb-2 block">Take A Look Around</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Comfortable Facilities</h2>
-          <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Thoughtfully designed spaces that promote safety, comfort, and active social engagement for all our members.</p>
+    <section class="py-16 sm:py-20 bg-white dark:bg-gray-800 transition-colors">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16">
+          <span class="text-brand font-semibold tracking-wider uppercase text-xs sm:text-sm mb-2 block">Take A Look Around</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">Our Comfortable Facilities</h2>
+          <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Thoughtfully designed spaces that promote safety, comfort, and active social engagement for all our members.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Gallery Item 1 -->
@@ -243,34 +254,34 @@
     </section>
 
     <!-- SECTION 2 (Image-Based 2): Daily Activities Split Feature -->
-    <section class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors border-y border-gray-200 dark:border-gray-800">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="flex flex-col lg:flex-row items-center gap-12">
+    <section class="py-16 sm:py-20 bg-gray-50 dark:bg-gray-900 transition-colors border-y border-gray-200 dark:border-gray-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
           <!-- Text Content -->
           <div class="w-full lg:w-1/2 order-2 lg:order-1">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand text-sm font-semibold mb-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand text-xs sm:text-sm font-semibold mb-4 sm:mb-6">
               <i class="fa-solid fa-calendar-days"></i> Daily Schedule
             </div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">Enriching Activities for Mind, Body, and Spirit</h2>
-            <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg">Our structured daily routines are specifically designed to maintain cognitive function, improve mobility, and foster joyful connections among our seniors.</p>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 leading-tight">Enriching Activities for Mind, Body, and Spirit</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed">Our structured daily routines are specifically designed to maintain cognitive function, improve mobility, and foster joyful connections among our seniors.</p>
             
-            <ul class="space-y-5">
-              <li class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center flex-shrink-0 text-brand text-xl">
+            <ul class="space-y-4 sm:space-y-5">
+              <li class="flex items-start gap-3 sm:gap-4">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center flex-shrink-0 text-brand text-lg sm:text-xl">
                   <i class="fa-solid fa-person-walking"></i>
                 </div>
                 <div>
-                  <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Gentle Fitness & Yoga</h4>
-                  <p class="text-gray-500 dark:text-gray-400 mt-1">Seated exercises and stretching to promote flexibility and balance.</p>
+                  <h4 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">Gentle Fitness & Yoga</h4>
+                  <p class="text-gray-500 dark:text-gray-400 mt-1 text-xs sm:text-sm">Seated exercises and stretching to promote flexibility and balance.</p>
                 </div>
               </li>
-              <li class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center flex-shrink-0 text-brand text-xl">
+              <li class="flex items-start gap-3 sm:gap-4">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center flex-shrink-0 text-brand text-lg sm:text-xl">
                   <i class="fa-solid fa-brain"></i>
                 </div>
                 <div>
-                  <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Cognitive Games</h4>
-                  <p class="text-gray-500 dark:text-gray-400 mt-1">Trivia, memory puzzles, and bingo to keep the mind sharp.</p>
+                  <h4 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">Cognitive Games</h4>
+                  <p class="text-gray-500 dark:text-gray-400 mt-1 text-xs sm:text-sm">Trivia, memory puzzles, and bingo to keep the mind sharp.</p>
                 </div>
               </li>
             </ul>
@@ -279,8 +290,8 @@
           <div class="w-full lg:w-1/2 order-1 lg:order-2">
             <div class="relative rounded-3xl overflow-hidden shadow-2xl">
               <img src="images/eldercare (11).jpg" alt="Seniors playing games" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-700">
-              <div class="absolute bottom-6 left-6 right-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
-                <p class="font-semibold text-gray-900 dark:text-white text-center">"A typical afternoon filled with laughter and friendship."</p>
+              <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+                <p class="font-semibold text-gray-900 dark:text-white text-center text-xs sm:text-sm">"A typical afternoon filled with laughter and friendship."</p>
               </div>
             </div>
           </div>
@@ -288,11 +299,11 @@
       </div>
     </section>
 <!-- SECTION 3 (Image-Based 3): Meet Our Care Team Profiles -->
-    <section class="py-20 bg-white dark:bg-gray-800 transition-colors">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Meet Our Compassionate Caregivers</h2>
-          <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Our certified professionals treat every member like their own family.</p>
+    <section class="py-16 sm:py-20 bg-white dark:bg-gray-800 transition-colors">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">Meet Our Compassionate Caregivers</h2>
+          <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Our certified professionals treat every member like their own family.</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -353,9 +364,9 @@
     </section>
 
     <!-- SECTION 4 (Design: Text/Testimonial Cards): What Families Say -->
-    <section class="py-20 bg-brand/5 dark:bg-gray-900 transition-colors">
-      <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Words from Our Families</h2>
+    <section class="py-16 sm:py-20 bg-brand/5 dark:bg-gray-900 transition-colors">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-8 sm:mb-12">Words from Our Families</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 relative flex flex-col h-full">
@@ -401,14 +412,15 @@
       </div>
     </section>
 
-            <section class="py-16 bg-brand dark:bg-brand-dark text-white relative overflow-hidden">
-
-        <div class="text-center bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20">
-          <h2 class="text-3xl font-bold mb-4">Ready to Join Our Family?</h2>
-          <p class="text-brand-light max-w-2xl mx-auto mb-8">We offer flexible day plans, from half-days to full 5-day schedules. Contact us to learn about availability and pricing.</p>
-          <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="contact.html" class="bg-white text-brand hover:bg-gray-100 px-8 py-3 rounded-full font-bold transition-colors">Request a Tour</a>
-            <a href="about.html" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-full font-bold transition-colors">Learn More</a>
+    <!-- CTA Banner: Ready to Join -->
+    <section class="py-12 sm:py-16 bg-brand dark:bg-brand-dark text-white relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center bg-white/10 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-10 border border-white/20">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Ready to Join Our Family?</h2>
+          <p class="text-brand-light max-w-2xl mx-auto mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">We offer flexible day plans, from half-days to full 5-day schedules. Contact us to learn about availability and pricing.</p>
+          <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+            <a href="contact.html" class="bg-white text-brand hover:bg-gray-100 px-6 sm:px-8 py-3 rounded-full font-bold transition-colors text-sm sm:text-base text-center">Request a Tour</a>
+            <a href="about.html" class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-6 sm:px-8 py-3 rounded-full font-bold transition-colors text-sm sm:text-base text-center">Learn More</a>
           </div>
         </div>
       </div>
@@ -418,7 +430,7 @@
 
   <!-- ================= FOOTER ================= -->
   <footer class="bg-gray-950 text-gray-300 pt-16 pb-8 border-t-4 border-brand">
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12">
       
       <!-- Brand Column -->
       <div>
@@ -473,9 +485,9 @@
     </div>
     
     <!-- Footer Bottom -->
-    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-500 text-center md:text-left">
       <span>© 2026 Elder Care Center. All rights reserved.</span>
-      <div class="flex gap-6">
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
         <a href="#" class="hover:text-brand transition-colors">Privacy Policy</a>
         <a href="#" class="hover:text-brand transition-colors">Terms of Service</a>
         <a href="#" class="hover:text-brand transition-colors">Accessibility</a>

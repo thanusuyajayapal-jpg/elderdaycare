@@ -76,8 +76,8 @@
 
         /* BUTTONS */
         .icon-btn {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--bg-secondary);
             color: var(--text-main);
@@ -390,7 +390,7 @@
                 <h2 id="page-title" class="text-lg sm:text-xl font-bold text-[var(--text-main)] truncate">Dashboard Overview</h2>
             </div>
             <div class="flex items-center gap-2 sm:gap-4 shrink-0">
-                <a href="index.html" class="text-xs sm:text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--accent-color)] mr-1 sm:mr-3 transition-colors flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg hover:bg-[var(--bg-secondary)]" title="Back to Site">
+                <a href="index.html" class="h-10 text-xs sm:text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--accent-color)] mr-1 sm:mr-3 transition-colors inline-flex items-center gap-1.5 px-3 rounded-lg hover:bg-[var(--bg-secondary)]" title="Back to Site">
                     <i class="fas fa-arrow-left"></i>
                     <span class="hidden sm:inline">Back to Site</span>
                 </a>
@@ -524,108 +524,110 @@
 
                 <!-- TABLE -->
                 <div class="mt-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)] overflow-x-auto">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="font-bold text-[var(--text-main)] text-lg">Recent Enrollments</h3>
-                        <button class="text-[var(--accent-color)] text-sm font-semibold hover:underline">View All</button>
-                    </div>
-                    <table class="w-full min-w-[550px]">
-                        <thead>
-                            <tr>
-                                <th>Member</th>
-                                <th>Care Plan</th>
-                                <th>Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                                <td>
-                                    <div class="font-semibold">Martha Stevens</div>
-                                    <div class="text-xs text-[var(--text-muted)]">Drop-In / Half Day</div>
-                                </td>
-                                <td>Basic Support</td>
-                                <td>Oct 09, 2026</td>
-                                <td class="font-bold">$45.00</td>
-                                <td><span class="status-badge status-active bg-emerald-100 text-emerald-600">Paid</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                                <td>
-                                    <div class="font-semibold">Arthur Pendelton</div>
-                                    <div class="text-xs text-[var(--text-muted)]">Full Monthly Plan</div>
-                                </td>
-                                <td>Standard Care</td>
-                                <td>Oct 08, 2026</td>
-                                <td class="font-bold">$850.00</td>
-                                <td><span class="status-badge status-active bg-emerald-100 text-emerald-600">Paid</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                                <td>
-                                    <div class="font-semibold">Eleanor Rigby</div>
-                                    <div class="text-xs text-[var(--text-muted)]">Specialized Care</div>
-                                </td>
-                                <td>Memory Care Wing</td>
-                                <td>Oct 07, 2026</td>
-                                <td class="font-bold">$1,200.00</td>
-                                <td><span class="status-badge status-pending">Processing</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                                <td>
-                                    <div class="font-semibold">William Thomas</div>
-                                    <div class="text-xs text-[var(--text-muted)]">Drop-In / Half Day</div>
-                                </td>
-                                <td>Basic Support</td>
-                                <td>Oct 06, 2026</td>
-                                <td class="font-bold">$45.00</td>
-                                <td><span class="status-badge status-error">Declined</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div class="flex justify-between items-center mb-6">
+        <h3 class="font-bold text-[var(--text-main)] text-lg">Recent Enrollments</h3>
+        <button class="text-[var(--accent-color)] text-sm font-semibold hover:underline">View All</button>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full min-w-[550px] text-left border-collapse">
+            <thead>
+                <tr class="border-b border-[var(--border-color)] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th class="py-3 px-4">Member</th>
+                    <th class="py-3 px-4">Care Plan</th>
+                    <th class="py-3 px-4">Date</th>
+                    <th class="py-3 px-4">Amount</th>
+                    <th class="py-3 px-4">Status</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--border-color)] text-sm">
+                <tr class="hover:bg-gray-100/60 dark:hover:bg-gray-800/80 transition-colors">
+                    <td class="py-3.5 px-4">
+                        <div class="font-semibold text-[var(--text-main)]">Martha Stevens</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">Drop-In / Half Day</div>
+                    </td>
+                    <td class="py-3.5 px-4 text-gray-700 dark:text-gray-300">Basic Support</td>
+                    <td class="py-3.5 px-4 text-gray-700 dark:text-gray-300">Oct 09, 2026</td>
+                    <td class="py-3.5 px-4 font-bold text-[var(--text-main)]">$45.00</td>
+                    <td class="py-3.5 px-4"><span class="status-badge inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">Paid</span></td>
+                </tr>
+                <tr class="hover:bg-gray-100/60 dark:hover:bg-gray-800/80 transition-colors">
+                    <td class="py-3.5 px-4">
+                        <div class="font-semibold text-[var(--text-main)]">Arthur Pendelton</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">Full Monthly Plan</div>
+                    </td>
+                    <td class="py-3.5 px-4 text-gray-700 dark:text-gray-300">Standard Care</td>
+                    <td class="py-3.5 px-4 text-gray-700 dark:text-gray-300">Oct 08, 2026</td>
+                    <td class="py-3.5 px-4 font-bold text-[var(--text-main)]">$850.00</td>
+                    <td class="py-3.5 px-4"><span class="status-badge inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">Paid</span></td>
+                </tr>
+                <tr class="hover:bg-gray-100/60 dark:hover:bg-gray-800/80 transition-colors">
+                    <td class="py-3.5 px-4">
+                        <div class="font-semibold text-[var(--text-main)]">Eleanor Rigby</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">Specialized Care</div>
+                    </td>
+                    <td class="py-3.5 px-4 text-gray-700 dark:text-gray-300">Memory Care Wing</td>
+                    <td class="py-3.5 px-4 text-gray-700 dark:text-gray-300">Oct 07, 2026</td>
+                    <td class="py-3.5 px-4 font-bold text-[var(--text-main)]">$1,200.00</td>
+                    <td class="py-3.5 px-4"><span class="status-badge inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400">Processing</span></td>
+                </tr>
+                <tr class="hover:bg-gray-100/60 dark:hover:bg-gray-800/80 transition-colors">
+                    <td class="py-3.5 px-4">
+                        <div class="font-semibold text-[var(--text-main)]">William Thomas</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">Drop-In / Half Day</div>
+                    </td>
+                    <td class="py-3.5 px-4 text-gray-700 dark:text-gray-300">Basic Support</td>
+                    <td class="py-3.5 px-4 text-gray-700 dark:text-gray-300">Oct 06, 2026</td>
+                    <td class="py-3.5 px-4 font-bold text-[var(--text-main)]">$45.00</td>
+                    <td class="py-3.5 px-4"><span class="status-badge inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-600 dark:bg-rose-950/60 dark:text-rose-400">Declined</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
             </div>
 
             <!-- MANAGE SENIORS SECTION -->
-            <div id="section-seniors" class="content-section hidden">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
-                    <h3 class="font-bold text-[var(--text-main)] text-xl">Manage Seniors</h3>
-                    <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors shrink-0 w-full sm:w-auto text-center"><i class="fas fa-plus mr-2"></i>Add Senior</button>
-                </div>
-                <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
-                    <div class="flex items-center gap-3 mb-6">
-                        <input type="text" placeholder="Search seniors..." class="w-full sm:max-w-md bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)]">
-                        <button class="bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:bg-[var(--border-color)] text-[var(--text-main)] font-bold py-2 px-4 rounded-lg transition-colors shrink-0"><i class="fas fa-search"></i></button>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full min-w-[580px]">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Age</th>
-                                    <th>Primary Contact</th>
-                                    <th>Care Level</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                                    <td class="font-semibold text-[var(--text-main)]">John Doe</td>
-                                    <td>82</td>
-                                    <td>Jane Doe (Daughter)</td>
-                                    <td><span class="status-badge bg-blue-100 text-blue-600">Standard</span></td>
-                                    <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">View Profile</button></td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                                    <td class="font-semibold text-[var(--text-main)]">Mary Smith</td>
-                                    <td>78</td>
-                                    <td>Robert Smith (Son)</td>
-                                    <td><span class="status-badge bg-purple-100 text-purple-600">Memory Care</span></td>
-                                    <td><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">View Profile</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+           <div id="section-seniors" class="content-section hidden">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+        <h3 class="font-bold text-[var(--text-main)] text-xl">Manage Seniors</h3>
+        <button class="bg-[var(--accent-color)] hover:bg-[var(--accent-dark)] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors shrink-0 w-full sm:w-auto text-center"><i class="fas fa-plus mr-2"></i>Add Senior</button>
+    </div>
+    <div class="bg-[var(--bg-card)] rounded-2xl sm:rounded-[20px] p-4 sm:p-6 border border-[var(--border-color)]">
+        <div class="flex items-center gap-3 mb-6">
+            <input type="text" placeholder="Search seniors..." class="w-full sm:max-w-md bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)] placeholder-gray-400 dark:placeholder-gray-500">
+            <button class="bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:bg-[var(--border-color)] text-[var(--text-main)] font-bold py-2 px-4 rounded-lg transition-colors shrink-0"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-[580px] text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-[var(--border-color)] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        <th class="py-3 px-4">Name</th>
+                        <th class="py-3 px-4">Age</th>
+                        <th class="py-3 px-4">Primary Contact</th>
+                        <th class="py-3 px-4">Care Level</th>
+                        <th class="py-3 px-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-[var(--border-color)]">
+                    <tr class="hover:bg-gray-100/60 dark:hover:bg-gray-800/80 transition-colors">
+                        <td class="py-4 px-4 font-semibold text-[var(--text-main)]">John Doe</td>
+                        <td class="py-4 px-4 text-gray-700 dark:text-gray-300">82</td>
+                        <td class="py-4 px-4 text-gray-700 dark:text-gray-300">Jane Doe (Daughter)</td>
+                        <td class="py-4 px-4"><span class="status-badge inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300">Standard</span></td>
+                        <td class="py-4 px-4"><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">View Profile</button></td>
+                    </tr>
+                    <tr class="hover:bg-gray-100/60 dark:hover:bg-gray-800/80 transition-colors">
+                        <td class="py-4 px-4 font-semibold text-[var(--text-main)]">Mary Smith</td>
+                        <td class="py-4 px-4 text-gray-700 dark:text-gray-300">78</td>
+                        <td class="py-4 px-4 text-gray-700 dark:text-gray-300">Robert Smith (Son)</td>
+                        <td class="py-4 px-4"><span class="status-badge inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-600 dark:bg-purple-900/40 dark:text-purple-300">Memory Care</span></td>
+                        <td class="py-4 px-4"><button class="text-[var(--accent-color)] hover:underline text-sm font-semibold">View Profile</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
             <!-- CARE PLANS SECTION -->
             <div id="section-careplans" class="content-section hidden">
